@@ -1,0 +1,82 @@
+@use "./../../../shared/styles/forms";
+@use "./../../../shared/styles/button";
+
+.form-wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: stretch;
+    background: linear-gradient(135deg, rgba(230, 255, 255, 0.7), rgba(200, 240, 255, 0.7)); 
+    border: 1px solid #c0d9e6; 
+    border-radius: 15px; 
+    padding: 20px; 
+    width: 100%; 
+    max-width: 600px; 
+    margin: auto; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 100px;
+
+    .form{
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+        gap: 10px;
+        width: 250px;
+
+        &__input{
+            @include forms.text-input;
+        }
+
+        &__label{
+            @include forms.label
+        }
+
+        &__button-confirm {
+            @include button.button(rgb(0,0,0,0));
+            background: linear-gradient(90deg, #ff3333, #cc0033); 
+            color: white;
+            font-size: 16px;
+            margin: 10px 50px;
+            transition: all 0.3s ease-in-out;
+          
+            &:hover {
+              background: linear-gradient(90deg, darken(#ff3333, 5%), darken(#ff3333, 5%));
+            }
+          
+            &:active {
+              background: #b30000; 
+            }
+          
+            &:disabled {
+              opacity: 0.6;
+              cursor: not-allowed;
+              background: #990000; 
+            }
+        }
+    }
+    
+    .alert{
+        background: rgb(249,195,195);
+        background: linear-gradient(68deg, rgba(249,195,195,1) 0%, rgba(254,217,217,1) 50%, rgba(252,69,69,1) 100%);
+        border-color: darkgrey;
+        border-radius: 6px;
+        padding: 6px;
+        transform: translateX(0%);
+        transition: transform ease-out 1s;
+
+        [hidden]{
+            transform: translateX(100%);
+            transition: transform ease-out 1s;
+
+        }
+
+        &__error{
+            font-size: small;
+            text-align:start;
+            color: rgb(27, 26, 26);
+            transition: all 0.2s ease-in-out;
+        }
+    }
+}

@@ -1,0 +1,41 @@
+<div class="form-wrapper">
+    <div>
+        <h2>
+            &nbsp;Вход в <br> 
+            <img src="logo.svg" />
+        </h2>
+        <div>
+            Нет аккаунта? <a routerLink="/auth/signup" routerLinkActive="active" ariaCurrentWhenActive="page"> Зарегистрируйтесь </a>
+        </div> 
+    </div>  
+    <form class="form" [formGroup]="profileForm" (ngSubmit)="login()">
+
+        <label for="email">Электронная почта</label>
+        <input [ngClass]="profileForm.controls.email.valid ? 'form__input form__input--valid' : 'form__input'" type="email" name="email" formControlName="email" />
+        <div *ngIf="profileForm.controls.email.invalid && 
+            (profileForm.controls.email.dirty || profileForm.controls.email.touched)"
+            class="alert" 
+        >
+            <div class="alert__error" *ngIf="profileForm.controls.email.hasError('required')">
+                &#9940; Электронная почта обязательна 
+            </div>
+        </div>
+
+        <label for="password">Пароль</label>
+        <input [ngClass]="profileForm.controls.password.valid ? 'form__input form__input--valid' : 'form__input'" type="password" name="password" formControlName="password" />
+        <div *ngIf="profileForm.controls.password.invalid && 
+            (profileForm.controls.password.dirty || profileForm.controls.password.touched)"
+            class="alert" 
+        >
+            <div class="alert__error" *ngIf="profileForm.controls.password.hasError('required')">
+                &#9940; Пароль обязателен
+            </div>
+        </div>
+
+        <button type="submit" class="form__button-confirm" [disabled]="!profileForm.valid || pending">{{pendingButton}}</button>
+
+        <div *ngIf="hasError()" class="alert">
+            {{errorMessage}}
+        </div>
+    </form>
+</div>
