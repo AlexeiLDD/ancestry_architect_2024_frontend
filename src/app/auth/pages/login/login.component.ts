@@ -31,11 +31,11 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthService, 
-    private userService:UserService, 
+    private userService: UserService, 
     private router: Router,
   ) {}
 
-  hasError():boolean {
+  hasError(): boolean {
     return this.errorMessage !== '';
   }
 
@@ -67,12 +67,12 @@ export class LoginComponent {
           }
         },
         error: () => {
-          this.errorMessage = 'Что-то пошло не так :( Попробуйте позже.'
+          this.errorMessage = 'Что-то пошло не так :( Попробуйте позже.';
           clearInterval(LoadingAnimation); 
           this.pendingButton = 'Вход'; 
           this.pending = false;
         },
-      })
+      });
     }
   }
 }

@@ -37,18 +37,18 @@ export class SignupComponent {
 
   constructor(
     private authService: AuthService, 
-    private userService:UserService, 
+    private userService: UserService, 
     private router: Router,
   ) {}
 
-  hasError():boolean {
+  hasError(): boolean {
     return this.errorMessage !== '';
   }
 
   onChange(){
     this.passwordObj.password = this.profileForm.value.password as string;
 
-    this.profileForm.controls.repeatedPassword.enable()
+    this.profileForm.controls.repeatedPassword.enable();
   }
 
   signup() {
@@ -79,12 +79,12 @@ export class SignupComponent {
           }
         },
         error: () => {
-          this.errorMessage = 'Что-то пошло не так :( Попробуйте позже.'
+          this.errorMessage = 'Что-то пошло не так :( Попробуйте позже.';
           clearInterval(LoadingAnimation); 
           this.pendingButton = 'Вход'; 
           this.pending = false;
         },
-      })
+      });
     }
   }
 }
