@@ -1,0 +1,71 @@
+<div class="form-wrapper">
+    <div>
+        <h2>
+            &nbsp;Регистрация в <br> 
+            <img src="logo.svg" />
+        </h2>
+        <div>
+            Есть аккаунт? <a routerLink="/auth/login" routerLinkActive="active" ariaCurrentWhenActive="page"> Авторизируйтесь </a>
+        </div> 
+    </div>  
+    <form class="form" [formGroup]="profileForm" (ngSubmit)="signup()" (change)="onChange()" (input)="onChange()" (blur)="onChange()">
+
+        <label for="email">Электронная почта</label>
+        <input [ngClass]="profileForm.controls.email.valid ? 'form__input form__input--valid' : 'form__input'" type="email" name="email" formControlName="email" />
+        <div *ngIf="profileForm.controls.email.invalid && 
+            (profileForm.controls.email.dirty || profileForm.controls.email.touched)"
+            class="alert" 
+        >
+            <div class="alert__error" *ngIf="profileForm.controls.email.hasError('required')">
+                &#9940; Электронная почта обязательна 
+            </div>
+            <div class="alert__error" 
+                *ngIf="(profileForm.controls.email.hasError('email') || profileForm.controls.email.hasError('dot'))  &&
+                !profileForm.controls.email.hasError('required')" 
+            >
+                &#9940; Электронная почта должна удовлетворять формату: exampl&#64;email.ru
+            </div>
+        </div>
+
+        <label for="password">Пароль</label>
+        <input [ngClass]="profileForm.controls.password.valid ? 'form__input form__input--valid' : 'form__input'" type="password" name="password" formControlName="password" />
+        <div *ngIf="profileForm.controls.password.invalid && 
+            (profileForm.controls.password.dirty || profileForm.controls.password.touched)"
+            class="alert" 
+        >
+            <div class="alert__error" *ngIf="profileForm.controls.password.hasError('required')">
+                &#9940; Пароль обязателен
+            </div>
+            <div class="alert__error" 
+                *ngIf="profileForm.controls.password.hasError('minlength') &&
+                !profileForm.controls.password.hasError('required')"
+            >
+                &#9940; Пароль должен содержать минимум 8 символов
+            </div>
+            <div class="alert__error" *ngIf="profileForm.controls.password.hasError('specialSymbols') &&
+                !profileForm.controls.password.hasError('required')"
+            >
+                &#9940; Пароль должен содержать хотя бы один символ из &#64;#$%^&*?!
+            </div>
+        </div>
+
+        <label for="password">Повторите пароль</label>
+        <input [ngClass]="profileForm.controls.repeatedPassword.valid ? 'form__input form__input--valid' : 'form__input'" type="password" name="repeatedPassword" formControlName="repeatedPassword" />
+        <div *ngIf="profileForm.controls.repeatedPassword.invalid && 
+            (profileForm.controls.repeatedPassword.dirty || profileForm.controls.repeatedPassword.touched) &&
+            (!profileForm.controls.repeatedPassword.hasError('required') ||
+            profileForm.controls.repeatedPassword.hasError('equal'))"
+            class="alert" 
+        >
+            <div class="error" *ngIf="profileForm.controls.repeatedPassword.hasError('equal')">
+                &#9940; Пароли не совпадают
+            </div>
+        </div>
+
+        <button type="submit" class="form__button-confirm" [disabled]="!profileForm.valid || pending">{{pendingButton}}</button>
+        
+        <div *ngIf="hasError()" class="alert">
+            {{errorMessage}}
+        </div>
+    </form>
+</div>
