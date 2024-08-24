@@ -1,0 +1,13 @@
+<header class="header">
+    <a class="header__logo" routerLink="/" routerLinkActive="router-link-active">
+        <img  src="logo.svg" alt="logo" height="35px">
+    </a>
+    <nav class="header__auth">
+        @if (isAuth()) {
+            <p>{{username()}}</p>
+        } @else {
+            <a class="auth-button" routerLink="/auth/login" routerLinkActive="router-link-active" >Вход</a>
+            <a class="auth-button" routerLink="/auth/signup" routerLinkActive="router-link-active" >Регистрация</a>
+        }
+    </nav>
+</header>
