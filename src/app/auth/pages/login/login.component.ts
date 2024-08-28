@@ -3,10 +3,15 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass, NgIf, NgStyle } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
-import { HttpStatusCode } from '@angular/common/http';
+import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { PendingSubmitAnimationBase } from '../../shared/pending-submit-animation-base';
 import { AuthService } from './../../services/auth/auth.service';
 import { UserService } from '../../../core/services/user/user.service';
+import { Request } from '../../../core/models/request';
 
+const SubmitButtonTitle = 'Вход';
+const UnknownErrorMessage = 'Что-то пошло не так :( Попробуйте позже.';
+const WrongCredentialsErrorMessage = 'Неверный Email или пароль.'
 
 @Component({
   selector: 'login-page',
@@ -15,9 +20,9 @@ import { UserService } from '../../../core/services/user/user.service';
   standalone: true,
   imports: [ReactiveFormsModule, NgStyle, NgClass, NgIf, RouterLink],
 })
-export class LoginComponent {
-  pending = false;
-  pendingButton = 'Вход';
+export class LoginComponent extends PendingSubmitAnimationBase {
+  override submitButtonTitle = SubmitButtonTitle;
+
   errorMessage = '';
 
   profileForm = new FormGroup({
@@ -33,46 +38,40 @@ export class LoginComponent {
     private authService: AuthService, 
     private userService: UserService, 
     private router: Router,
-  ) {}
+  ) { super() }
 
   hasError(): boolean {
     return this.errorMessage !== '';
   }
 
   login() {
-    this.pendingButton = 'Загрузка';
-    this.pending = true;
-    let ticker = 0;
+    this.errorMessage = '';
+    const animationTimeout = this.startLoadingAnimation();
 
-    const LoadingAnimation = setInterval(() => {
-      this.pendingButton = this.pendingButton.concat('.');
-      ticker++;
-
-      if (ticker % 4 === 0) {
-        this.pendingButton = this.pendingButton.slice(0, this.pendingButton.length - 4);
-      }
-    }, 250);
-
-    if (typeof this.profileForm.value.email === 'string' && 
-      typeof this.profileForm.value.password === 'string') 
-    {
-      this.authService.login(this.profileForm.value.email, this.profileForm.value.password).subscribe({
-        next: (value) => {
-          if (value.code === HttpStatusCode.Ok){
-            this.userService.User = value.payload;
-            this.router.navigateByUrl('/');
-            clearInterval(LoadingAnimation); 
-            this.pendingButton = 'Вход'; 
-            this.pending = false;
-          }
-        },
-        error: () => {
-          this.errorMessage = 'Что-то пошло не так :( Попробуйте позже.';
-          clearInterval(LoadingAnimation); 
-          this.pendingButton = 'Вход'; 
-          this.pending = false;
-        },
-      });
-    }
+    const request: Request.Auth.Login = {
+      email: this.profileForm.value.email as string,
+      password: this.profileForm.value.password as string,
+    };
+    
+    this.authService.login(request).subscribe({
+      next: (value) => {
+        if (value.code === HttpStatusCode.Ok){
+          this.userService.User = value.payload;
+          clearInterval(animationTimeout); 
+          this.router.navigateByUrl('/');
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        if (err.status === HttpStatusCode.BadRequest) {
+          this.errorMessage = WrongCredentialsErrorMessage;
+        } else {
+          this.errorMessage = UnknownErrorMessage;
+        }
+        
+        clearInterval(animationTimeout); 
+        this.submitButtonTitle = SubmitButtonTitle; 
+        this.pending = false;
+      },
+    });
   }
 }

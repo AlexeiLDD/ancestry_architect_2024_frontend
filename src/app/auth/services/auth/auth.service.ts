@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpStatusCode, HttpHeaders} from '@angular/common/http';
-import { HttpBase } from './../../../core/models/http-base';
-import { Response } from './../../../core/models/response';
-import { User } from './../../../core/models/auth';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
+import { HttpBase } from './../../../core/models/http-base';
+import { Request } from '../../../core/models/request';
+import { Response, UserResponse } from './../../../core/models/response';
+import { User } from './../../../core/models/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -12,18 +12,18 @@ import { Observable } from 'rxjs';
 export class AuthService extends HttpBase{
   constructor(private http: HttpClient) { super(); }
 
-  public login(email: string, password: string): Observable<Response<User>> {
-    return this.http.post<Response<User>>(
-      `${this.baseURL}login`,
-      { email, password },
+  public login(request: Request.Auth.Login): Observable<Response<UserResponse>> {
+    return this.http.post<Response<UserResponse>>(
+      `${this.baseURL}auth/login`,
+      request,
       { headers: this.baseHeaders },
     )
   }
 
-  public signup(email: string, password: string): Observable<Response<User>> {
-    return this.http.post<Response<User>>(
-      `${this.baseURL}signup`,
-      { email, password },
+  public signup(request: Request.Auth.Signup): Observable<Response<UserResponse>> {
+    return this.http.post<Response<UserResponse>>(
+      `${this.baseURL}auth/signup`,
+      request,
       { headers: this.baseHeaders },
     )
   }

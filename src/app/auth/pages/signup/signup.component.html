@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <button type="submit" class="form__button-confirm" [disabled]="!profileForm.valid || pending">{{pendingButton}}</button>
+        <button type="submit" class="form__button-confirm" [disabled]="!profileForm.valid || pending">{{submitButtonTitle}}</button>
         
         <div *ngIf="hasError()" class="alert">
             {{errorMessage}}
