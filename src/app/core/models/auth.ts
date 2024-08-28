@@ -16,7 +16,7 @@ export class User implements UserInterace{
     lastName?: string;
     dateOfBirth?: Date;
 
-    constructor(id: number, email:string){
+    constructor({ id, email }: UserInterace ){
         this.id = id;
         this.email = email;
     }
