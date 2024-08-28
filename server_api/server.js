@@ -7,11 +7,11 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 var app = express();
 
 app.use(cors())
-app.options('/api/login', cors())
+app.options('/api/auth/login', cors())
 
 const port = process.env.PORT || 8080;
 
-app.post("/api/login", urlencodedParser, function (req, res) {
+app.post("/api/auth/login", urlencodedParser, function (req, res) {
   res.set('Access-Control-Allow-Origin', '*');     
 
   if(!req.body) return res.sendStatus(400);
