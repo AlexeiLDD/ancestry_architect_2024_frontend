@@ -68,7 +68,7 @@ export class SignupComponent extends PendingSubmitAnimationBase {
     this.authService.signup(request).subscribe({
       next: (value) => {
         if (value.code === HttpStatusCode.Ok){
-          this.userService.User = value.payload;
+          this.userService.User = value.body;
           clearInterval(animationTimeout); 
           this.router.navigateByUrl('/');
         }

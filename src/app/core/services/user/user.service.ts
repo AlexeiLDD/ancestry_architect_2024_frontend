@@ -1,34 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { UserInterace } from '../../models/auth';
-import { HttpBase } from '../../models/http-base';
+import { HttpStatusCode } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { UserInterace, User } from '../../models/auth';
 import { Response, UserResponse } from './../../../core/models/response';
-import { User } from './../../../core/models/auth';
+import { AuthService } from '../../../auth/services/auth/auth.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService extends HttpBase {
+export class UserService {
   private user: UserInterace | undefined; 
 
-  constructor(private http: HttpClient) { 
-    super(); 
-  
-    this.http.get<Response<UserResponse>>(
-      `${this.baseURL}auth/check_auth`,
-      { headers: this.baseHeaders },
-    ).subscribe({
+  observableUser$!: Observable<Response<UserResponse>>;
+
+  constructor(private authService: AuthService) { 
+    this.observableUser$ = this.authService.checkAuth();
+
+    this.observableUser$.subscribe({
       next: (value) => {
-        if (value.payload.isAuth) {
-          this.User = value.payload;
+        if (value.body.isAuth) {
+          this.User = value.body;
         }
       },
     });
   }
 
   isAuth(): boolean {
-    return this.user !== undefined
+    return this.user !== undefined;
   }
 
   // Set user from UserResponse.
@@ -39,6 +38,28 @@ export class UserService extends HttpBase {
   }
 
   get User(): UserInterace | undefined {
-    return this.user
+    return this.user;
+  }
+
+  get username(): string {
+    if (this.isAuth()) {
+      if (this.User?.name){
+        return this.User?.name;
+      }
+    }
+
+    return this.User?.email as string;
+  }
+
+  logout() {
+    this.authService.logout().subscribe((resp) => {
+      if (resp.code === HttpStatusCode.Ok && resp.body.isAuth === false){
+        this.cleanUser();
+      }
+    });
+  }
+
+  private cleanUser() {
+    this.user = undefined;
   }
 }

@@ -26,6 +26,6 @@
 </g>
 <g>
     <title>Layer 1</title>
-    <text filter="url(#svg_1_blur)" font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_1" y="26.87777" x="4.477764" stroke-width="0" stroke="#000" fill="url(#svg_6)">Ancestry Architect</text>
+    <text filter="url(#svg_1_blur)" font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Helvetica, Arial, sans-serif" font-size="24" id="svg_1" y="26.87777" x="4.477764" stroke="#000" fill="url(#svg_6)"  stroke-width="0.2px">Ancestry Architect</text>
 </g>
 </svg>

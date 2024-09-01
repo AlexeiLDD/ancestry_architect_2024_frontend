@@ -3,7 +3,7 @@ import { UserInterace } from "./auth"
 
 export interface Response<T> {
     code: HttpStatusCode,
-    payload: T
+    body: T
 }
 
 export interface UserResponse {

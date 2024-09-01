@@ -1,13 +1,13 @@
 @use "./../../styles/button";
 
 .header {
-    padding: 10px 2vw 10px 2vw;
+    padding: 10px 4vw 10px 4vw;
     display: grid;
     grid-template: "logo logo logo auth";
     position: fixed;
     top: 0px;
     left: 0px;
-    width: 96vw;
+    width: 92vw;
     height: 50px;
     background: rgb(249,195,195);
     background: linear-gradient(68deg, rgba(249,195,195,1) 0%, rgba(254,217,217,1) 50%, rgba(252,69,69,1) 100%);
@@ -16,19 +16,69 @@
 
     &__logo{
         grid-area: logo;
+        display: flex;
+        align-items: center;
     }
 
     &__auth{
+        $background-color: rgb(200, 240, 255);
+
         display: flex;
-        justify-content: space-around;
+        justify-content: end;
+        flex-direction: row;
+        gap: 10px;
         align-items: center;
 
         .auth-button{
-            $background-color: rgb(200, 240, 255);
             @include button.button($background-color);
             background-color: $background-color;
         }
 
+        .profile{
+            @include button.button($background-color);
+            background-color: $background-color;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+            min-width: 230px;
+            gap: 7px;
+
+            &__avatar{
+                border-radius: 50%;
+                border-style: solid;
+                border-width: 2px;
+                border-color: rgba(252,69,69,1);
+            }
+
+            &__content {
+                display: none;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                z-index: 1;
+                max-height: none;
+                position: absolute;
+                padding: 20px 20px 20px 20px;
+                top: 78%;
+                right: 4vw;
+                cursor: default;
+            
+                transform: translateY(10px);
+                border-radius: 8px;
+                background-color: rgb(255, 255, 255);
+                border: 1px solid rgb(235, 235, 235);
+                animation-name: hYfEzu;
+                animation-duration: 0.2s;
+                min-width: 228px;
+
+                &--active{
+                    display: flex !important;
+                    flex-direction: column;
+                    justify-items: center;
+                    align-items:start;
+                    gap: 10px;
+                }
+            }
+        }
     }
 }
 
