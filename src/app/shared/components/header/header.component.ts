@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AsyncPipe, NgClass } from '@angular/common';
-import { HttpStatusCode } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { UserService } from '../../../core/services/user/user.service';
 import { Response, UserResponse } from '../../../core/models/response';
-import { AuthService } from '../../../auth/services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +17,6 @@ export class HeaderComponent {
 
   constructor(
     private userService: UserService,
-    private authService: AuthService,
   ) {}
 
   get observableUser$(): Observable<Response<UserResponse>> {

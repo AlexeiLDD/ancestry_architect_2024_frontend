@@ -11,7 +11,7 @@ export class LogoutRequiredService implements CanActivate {
   constructor(
     private userService: UserService,
     private router: Router,
-  ) { }
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
