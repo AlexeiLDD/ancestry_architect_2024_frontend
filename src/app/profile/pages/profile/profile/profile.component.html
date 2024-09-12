@@ -1,0 +1,39 @@
+<section class="profile-info">
+    <img src="profile.svg" alt="logo" height="50px" width="200px">
+    <form class="profile-form" [formGroup]="profileForm">
+        <div class="profile-form__item profile-form__item--end">
+            <label class="profile-form__label" for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="example@email.com" class="profile-form__input" formControlName="email">
+        </div>
+        <div class="profile-form__item profile-form__item--end">
+            <label class="profile-form__label" for="name">Имя:</label>
+            <input type="text" id="name" name="name" placeholder="Иван" class="profile-form__input" formControlName="name">
+        </div>
+        <div class="profile-form__item profile-form__item--end">
+            <label class="profile-form__label" for="surname">Фамилия:</label>
+            <input type="text" id="surname" name="surname" placeholder="Иванов" class="profile-form__input" formControlName="surname">
+        </div>
+        <div class="profile-form__item profile-form__item--end">
+            <label class="profile-form__label" for="birthdate">Дата рождения:</label>
+            <input type="date" id="birthdate" name="birthdate" class="profile-form__input" formControlName="birthdate">
+        </div>
+        <div class="profile-form__item profile-form__item--prestart">
+            <label class="profile-form__label" for="gender">Пол:</label>
+            <select id="gender" name="gender" class="profile-form__input profile-form__input--select" formControlName="gender">
+                <option value="male">Мужской</option>
+                <option value="female">Женский</option>
+                <option value="other">Другое</option>
+            </select>
+        </div>
+        <div class="profile-form__item profile-form__item--start">
+            @if (profileForm.controls.avatarPath.value !== '') {
+                <img class="avatar" src="{{profileForm.controls.avatarPath.value}}" alt="avatar" height="300px" width="300px">
+            } @else {
+                <img class="avatar" src="avatar.webp" alt="avatar" height="300px" width="300px">
+            }
+            <label class="profile-form__label" for="avatar">Аватар:</label>
+            <input type="file" id="avatar" name="avatar" accept="image/*" class="profile-form__input profile-form__input--file" formControlName="avatarPath">
+        </div>
+        <button type="submit" class="profile-form__submit">Обновить профиль</button>
+    </form>
+</section>

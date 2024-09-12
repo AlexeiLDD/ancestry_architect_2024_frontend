@@ -12,3 +12,24 @@
         background-color: darken($background, $amount: 10);
     }
 }
+
+@mixin button-confirmed{
+    @include button(rgb(0,0,0));
+    background: linear-gradient(90deg, #ff3333, #cc0033); 
+    color: white;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        background: linear-gradient(90deg, darken(#ff3333, 5%), darken(#ff3333, 5%));
+    }
+
+    &:active {
+        background: #b30000; 
+    }
+    
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        background: #990000; 
+    }
+}

@@ -10,7 +10,7 @@
     </div>  
     <form class="form" [formGroup]="profileForm" (ngSubmit)="signup()" (change)="onChange()" (input)="onChange()" (blur)="onChange()">
 
-        <label for="email">Электронная почта</label>
+        <label class="form__label" for="email">Электронная почта</label>
         <input [ngClass]="profileForm.controls.email.valid ? 'form__input form__input--valid' : 'form__input'" type="email" name="email" formControlName="email" />
         <div *ngIf="profileForm.controls.email.invalid && 
             (profileForm.controls.email.dirty || profileForm.controls.email.touched)"
@@ -27,7 +27,7 @@
             </div>
         </div>
 
-        <label for="password">Пароль</label>
+        <label class="form__label" for="password">Пароль</label>
         <input [ngClass]="profileForm.controls.password.valid ? 'form__input form__input--valid' : 'form__input'" type="password" name="password" formControlName="password" />
         <div *ngIf="profileForm.controls.password.invalid && 
             (profileForm.controls.password.dirty || profileForm.controls.password.touched)"
@@ -49,7 +49,7 @@
             </div>
         </div>
 
-        <label for="password">Повторите пароль</label>
+        <label class="form__label" for="password">Повторите пароль</label>
         <input [ngClass]="profileForm.controls.repeatedPassword.valid ? 'form__input form__input--valid' : 'form__input'" type="password" name="repeatedPassword" formControlName="repeatedPassword" />
         <div *ngIf="profileForm.controls.repeatedPassword.invalid && 
             (profileForm.controls.repeatedPassword.dirty || profileForm.controls.repeatedPassword.touched) &&

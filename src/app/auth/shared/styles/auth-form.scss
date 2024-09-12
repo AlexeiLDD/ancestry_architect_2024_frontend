@@ -30,30 +30,13 @@
         }
 
         &__label{
-            @include forms.label
+            @include forms.label();
         }
 
         &__button-confirm {
-            @include button.button(rgb(0,0,0,0));
-            background: linear-gradient(90deg, #ff3333, #cc0033); 
-            color: white;
+            @include button.button-confirmed();
             font-size: 16px;
             margin: 10px 50px;
-            transition: all 0.3s ease-in-out;
-          
-            &:hover {
-              background: linear-gradient(90deg, darken(#ff3333, 5%), darken(#ff3333, 5%));
-            }
-          
-            &:active {
-              background: #b30000; 
-            }
-          
-            &:disabled {
-              opacity: 0.6;
-              cursor: not-allowed;
-              background: #990000; 
-            }
         }
     }
     

@@ -10,7 +10,7 @@
                     <div>{{username}}</div>
                     &#9660;
                     <div class="profile__content" [ngClass]="isActiveMenu ? 'profile__content--active': ''">
-                        <a href="#" >Профиль</a>
+                        <a routerLink="profile" routerLinkActive="router-link-active" >Профиль</a>
                         <a href="#" >Избранное</a>
                         <a href="/logout" class="logout" (click)="logout($event)">Выйти</a>
                     </div>
