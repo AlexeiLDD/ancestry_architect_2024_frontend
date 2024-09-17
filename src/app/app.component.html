@@ -331,6 +331,11 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<app-header></app-header>
+ @defer (when isGotUser()) {
+  <app-header></app-header>
 
-<router-outlet />
+  <router-outlet />
+ } @placeholder {
+  <h2>Loading...</h2>
+ }
+

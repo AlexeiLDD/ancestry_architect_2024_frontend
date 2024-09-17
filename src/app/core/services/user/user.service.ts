@@ -5,7 +5,6 @@ import { UserInterace, User } from '../../models/auth';
 import { Response, UserResponse } from './../../../core/models/response';
 import { AuthService } from '../../../auth/services/auth/auth.service';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -13,12 +12,15 @@ export class UserService {
   private user: UserInterace | undefined; 
 
   observableUser$!: Observable<Response<UserResponse>>;
+  userIsFetched = false;
 
   constructor(private authService: AuthService) { 
     this.observableUser$ = this.authService.checkAuth();
 
     this.observableUser$.subscribe({
       next: (value) => {
+        this.userIsFetched = true;
+
         if (value.body.isAuth) {
           this.User = value.body;
         }

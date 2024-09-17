@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, mapToCanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable, catchError, map, of } from 'rxjs';
 import { UserService } from '../../../core/services/user/user.service';
-import { HttpStatusCode } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LogoutRequiredService implements CanActivate {
+export class LoginRequiredService implements CanActivate {
 
   constructor(
     private userService: UserService,
@@ -18,17 +17,16 @@ export class LogoutRequiredService implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> {
-    console.log('ssss')
     return this.userService.observableUser$.pipe(
       map((resp): boolean | UrlTree  => {
-        if (resp.body.isAuth) {
-          return this.router.createUrlTree(['/']);
+        if (!resp.body.isAuth) {
+          return this.router.createUrlTree(['/auth/login']);
         }
 
         return true;
       }),
       catchError(() => {
-        return of(true);
+        return of(this.router.createUrlTree(['/auth/login']));
       }),
     );
   }

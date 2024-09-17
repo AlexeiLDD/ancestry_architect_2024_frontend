@@ -26,27 +26,27 @@ export class ProfileComponent {
     private profileService: ProfileService, 
     private userService: UserService,
   ) {
-    userService.observableUser$.subscribe(() => {
-      if (userService.User === undefined) {
-        throw new Error('user is undefined');
+    if (userService.User === undefined) {
+      throw new Error('user is undefined');
+    }
+
+    profileService.getProfile(userService.User?.id).subscribe((value) => {
+      if (value.code === HttpStatusCode.Ok){
+        const { email } = userService.User as User;
+        const { name, surname, birthdate, gender, avatarPath } = value.body;
+
+        this.profileForm.patchValue({
+          email,
+          name,
+          surname,
+          birthdate,
+          gender,
+          avatarPath,
+        });
       }
-  
-      profileService.getProfile(userService.User?.id).subscribe((value) => {
-        if (value.code === HttpStatusCode.Ok){
-          const { email } = userService.User as User;
-          const { name, surname, birthdate, gender, avatarPath } = value.body;
-  
-          this.profileForm.patchValue({
-            email,
-            name,
-            surname,
-            birthdate,
-            gender,
-            avatarPath,
-          });
-        }
-      });
     });
   }
+
+  isRenderReady(){}
     
 }

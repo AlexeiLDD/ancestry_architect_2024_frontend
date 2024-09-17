@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AsyncPipe, NgClass } from '@angular/common';
 import { Observable } from 'rxjs';
 import { UserService } from '../../../core/services/user/user.service';
@@ -17,11 +17,8 @@ export class HeaderComponent {
 
   constructor(
     private userService: UserService,
+    private router: Router,
   ) {}
-
-  get observableUser$(): Observable<Response<UserResponse>> {
-    return this.userService.observableUser$;
-  }
 
   get username(): string {
     return this.userService.username;
@@ -39,9 +36,11 @@ export class HeaderComponent {
     this.isActiveMenu = false;
   }
 
-  logout(event: Event) {
-    event.preventDefault();
+  currentUrl():string {
+    return this.router.url.slice(1);
+  }
 
+  logout() {
     this.disabledDropdownMenu();
 
     this.userService.logout();

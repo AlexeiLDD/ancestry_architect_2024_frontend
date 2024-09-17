@@ -3,22 +3,20 @@
         <img  src="logo.svg" alt="logo" height="40px">
     </a>
     <nav class="header__auth">
-        @if (observableUser$ | async) {
-            @if (isAuth()) {
-                <div class="profile" (click)="activateDropdownMenu()" (mouseleave)="disabledDropdownMenu()">
-                    <img class="profile__avatar" src="avatar.webp" alt="avatar" height="30px" width="30px">
-                    <div>{{username}}</div>
-                    &#9660;
-                    <div class="profile__content" [ngClass]="isActiveMenu ? 'profile__content--active': ''">
-                        <a routerLink="profile" routerLinkActive="router-link-active" >Профиль</a>
-                        <a href="#" >Избранное</a>
-                        <a href="/logout" class="logout" (click)="logout($event)">Выйти</a>
-                    </div>
+        @if (isAuth()) {
+            <div class="profile" (click)="activateDropdownMenu()" (mouseleave)="disabledDropdownMenu()">
+                <img class="profile__avatar" src="avatar.webp" alt="avatar" height="30px" width="30px">
+                <div>{{username}}</div>
+                &#9660;
+                <div class="profile__content" [ngClass]="isActiveMenu ? 'profile__content--active': ''">
+                    <a routerLink="profile" routerLinkActive="router-link-active" >Профиль</a>
+                    <a href="#" >Избранное</a>
+                    <a [routerLink]="['/logout']" [queryParams]="{redirectUrl: currentUrl()}" routerLinkActive="router-link-active" class="logout" (click)="logout()">Выйти</a>
                 </div>
-            } @else {
-                <a class="auth-button" routerLink="/auth/login" routerLinkActive="router-link-active" >Вход</a>
-                <a class="auth-button" routerLink="/auth/signup" routerLinkActive="router-link-active" >Регистрация</a>
-            }
+            </div>
+        } @else {
+            <a class="auth-button" routerLink="/auth/login" routerLinkActive="router-link-active" >Вход</a>
+            <a class="auth-button" routerLink="/auth/signup" routerLinkActive="router-link-active" >Регистрация</a>
         }
     </nav>
 </header>
