@@ -19,21 +19,24 @@
         </div>
         <div class="profile-form__item profile-form__item--prestart">
             <label class="profile-form__label" for="gender">Пол:</label>
-            <select id="gender" name="gender" class="profile-form__input profile-form__input--select" formControlName="gender">
-                <option value="male">Мужской</option>
-                <option value="female">Женский</option>
-                <option value="other">Другое</option>
+            <select id="gender" name="gender" class="profile-form__input profile-form__input--select" formControlName="gender" >
+                <option value="">Выберите пол</option>
+                <option value="Мужской">Мужской</option>
+                <option value="Женский">Женский</option>
             </select>
         </div>
         <div class="profile-form__item profile-form__item--start">
             @if (profileForm.controls.avatarPath.value !== '') {
-                <img class="avatar" src="{{profileForm.controls.avatarPath.value}}" alt="avatar" height="300px" width="300px">
+                <img class="avatar" ngSrc="{{profileForm.controls.avatarPath.value}}" alt="avatar" height="300" width="300" priority/>
             } @else {
-                <img class="avatar" src="avatar.webp" alt="avatar" height="300px" width="300px">
+                <img class="avatar" ngSrc="'avatar.webp'" alt="avatar" height="300" width="300" priority/>
             }
             <label class="profile-form__label" for="avatar">Аватар:</label>
-            <input type="file" id="avatar" name="avatar" accept="image/*" class="profile-form__input profile-form__input--file" formControlName="avatarPath">
+            <input type="file" id="avatar" name="avatar" accept="image/*" (change)="loadAvatar($event)" class="profile-form__input profile-form__input--file" formControlName="avatarPath">
         </div>
-        <button type="submit" class="profile-form__submit">Обновить профиль</button>
+        <button type="submit" class="profile-form__submit" (click)="updateProfile()">{{submitButtonTitle}}</button>
     </form>
 </section>
+@if (renderMessage) {
+    <app-popup-message is-succeed="{{isSucceed}}" message="{{message}}"></app-popup-message>
+}
