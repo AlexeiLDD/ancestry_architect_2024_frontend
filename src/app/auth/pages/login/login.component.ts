@@ -56,8 +56,12 @@ export class LoginComponent extends PendingSubmitAnimationBase {
     this.authService.login(request).subscribe({
       next: (value) => {
         if (value.code === HttpStatusCode.Ok){
-          this.userService.User = value.body;
+          this.userService.User = value.body.user;
+          this.userService.User.name = value.body.name;
+          this.userService.User.surname = value.body.name;
+
           clearInterval(animationTimeout); 
+          
           this.router.navigateByUrl('/');
         }
       },

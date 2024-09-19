@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpStatusCode } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { UserInterace, User } from '../../models/auth';
+import { UserInterace, User } from '../../models/user';
 import { Response, UserResponse } from './../../../core/models/response';
 import { AuthService } from '../../../auth/services/auth/auth.service';
 
@@ -22,7 +22,9 @@ export class UserService {
         this.userIsFetched = true;
 
         if (value.body.isAuth) {
-          this.User = value.body;
+          this.User = value.body.user;
+          this.User.name = value.body.name;
+          this.User.surname = value.body.surname;
         }
       },
     });
@@ -32,12 +34,11 @@ export class UserService {
     return this.user !== undefined;
   }
 
-  // Set user from UserResponse.
-  set User(userResponse: UserResponse) {
-    this.user = new User(userResponse.user);
-    this.user.name = userResponse.name;
-    this.user.lastName = userResponse.surname;
+  set User(user: UserInterace) {
+    this.user = new User(user);
   }
+
+
 
   get User(): UserInterace | undefined {
     return this.user;
