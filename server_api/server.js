@@ -1,15 +1,35 @@
 "use strict";
 
 const express = require('express');
-var cors = require('cors');
-var bodyParser = require('body-parser');
-var urlencodedParser = bodyParser.urlencoded({ extended: false });
-var app = express();
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
+const path = require("path");
+const app = express();
 
 app.use(cors())
+
+app.use(
+  "/uploads",
+  express.static(
+    path.resolve(
+      __dirname,
+      "..",
+      "..",
+      "ancestry_architect_2024_2",
+      "uploads",
+    ),
+    {
+      maxAge: "60000", // uses milliseconds per docs
+      lastModified: true,
+    },
+  ),
+);
+
+
 app.options('/api/auth/login', cors())
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
 app.post("/api/auth/login", urlencodedParser, function (req, res) {
   res.set('Access-Control-Allow-Origin', '*');     
