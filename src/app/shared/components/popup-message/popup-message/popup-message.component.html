@@ -1,0 +1,4 @@
+<div class="popup" [ngClass]="isSucceed ? 'popup--succeed' : 'popup--failed'">
+    <img class="popup__label" [src]="isSucceed ? 'check_mark.svg' : 'error_mark.svg'" alt="label">
+    <div class="popup__message">{{message}}</div>
+</div>

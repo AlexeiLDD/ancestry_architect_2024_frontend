@@ -1,0 +1,35 @@
+.popup {
+    padding: 10px;
+    border-radius: 15px;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 150%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    animation: ani 3s forwards;
+
+
+    &--succeed {
+        background: rgb(98,137,234);
+        background: linear-gradient(68deg, rgba(98,137,234,1) 0%, rgba(159,243,225,1) 33%, rgba(20,237,4,1) 100%);
+    }
+
+    &--failed {
+        background: rgb(98,137,234);
+        background: linear-gradient(68deg, rgba(98,137,234,1) 0%, rgba(243,221,159,1) 33%, rgba(251,12,4,1) 100%);
+    }
+
+    &__label {
+        height: 30px;
+        width: 30px;
+        padding-inline-end: 10px;
+    }
+}
+  
+@keyframes ani {
+    0% {transform: translate(-50%, 150%);}
+    20% {transform: translate(-50%, 0);}
+    80% {transform: translate(-50%, 0);}
+    100% {transform: translate(-50%, 150%);}
+}
