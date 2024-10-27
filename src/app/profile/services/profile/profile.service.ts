@@ -19,7 +19,7 @@ export class ProfileService extends HttpBase {
 
   public updateProfile(request: FormData): Observable<Response<UpdateProfileResponse> | SeveralErrorsResponse> {
     return this.http.post<Response<UpdateProfileResponse> | SeveralErrorsResponse>(
-      `${this.baseURL}profile/edit`,
+      `${this.baseURL}profile`,
       request,
       { headers: this.baseHeaders },
     );
