@@ -1,0 +1,11 @@
+<dialog class="dialog" (click)="closeDialog()" #dialog>
+    <img class="dialog__close" src="close-x-svgrepo-com.svg" alt="close" (click)="closeDialog()">
+    <div class="dialog__wrapper" (click)="stopDialogPropagation($event)">
+        <ng-content/>
+        <form class="form" [formGroup]="grantPermissionForm" (ngSubmit)="submitGrantPermissionForm()">
+            <label class="form__label" for="email">Введите&nbsp;Электронную&nbsp;почту пользователя</label>
+            <input [ngClass]="grantPermissionForm.controls.email.valid ? 'form__input form__input--valid' : 'form__input'" type="email" name="email" formControlName="email" />
+            <button type="submit" class="form__button-confirm" [disabled]="!grantPermissionForm.valid">Предоставить&nbsp;доступ</button>
+        </form>
+    </div>
+</dialog>
