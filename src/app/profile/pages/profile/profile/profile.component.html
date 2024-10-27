@@ -29,7 +29,7 @@
             @if (profileForm.controls.avatarPath.value !== '') {
                 <img class="avatar" ngSrc="{{profileForm.controls.avatarPath.value}}" alt="avatar" height="300" width="300" priority/>
             } @else {
-                <img class="avatar" ngSrc="'avatar.webp'" alt="avatar" height="300" width="300" priority/>
+                <img class="avatar" ngSrc="avatar.webp" alt="avatar" height="300" width="300" priority/>
             }
             <label class="profile-form__label" for="avatar">Аватар:</label>
             <input type="file" id="avatar" name="avatar" accept="image/*" (change)="loadAvatar($event)" class="profile-form__input profile-form__input--file" formControlName="avatarPath">
