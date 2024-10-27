@@ -1,0 +1,12 @@
+<div class="tree-element" [ngClass]="isCreated ? 'tree-element--created' : 'tree-element--available'">
+    <a [routerLink]="['tree', treeId]" class="tree-element__link">{{name}}</a>
+    @if (isCreated) {
+        <img class="tree-element__menu-open" src="kebab-menu-svgrepo-com.svg" alt="menu" #menu (click)="openMenu()">
+    }
+</div>  
+<div class="tree-element__menu" 
+    (clickOutside)="closeMenu($event)"
+    (click)="emitGrantPermission()"
+    [ngStyle]="menuCoordinates"
+    [ngClass]="menuIsRendered ? '' : 'tree-element__menu--closed'"
+>Предоставить&nbsp;доступ</div>     
