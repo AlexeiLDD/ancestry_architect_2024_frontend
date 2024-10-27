@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './auth/pages/login/login.component';
 import { SignupComponent } from './auth/pages/signup/signup.component';
 import { ProfileComponent } from './profile/pages/profile/profile/profile.component';
+import { TreeListComponent } from './tree/pages/tree-list/tree-list.component';
 import { LogoutRequiredService } from './shared/services/logout-required/logout-required.service';
 import { LoginRequiredService } from './shared/services/login-required/login-required.service';
 
@@ -12,6 +13,12 @@ const loginRequiredRoutes: Routes = [
     component: ProfileComponent,
     canActivate: [LoginRequiredService]
   },
+  {
+    path: 'tree/list',
+    title: 'Список деревьев',
+    component: TreeListComponent,
+    canActivate: [LoginRequiredService]
+  }
 ];
 
 export const routes: Routes = [

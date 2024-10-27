@@ -1,0 +1,47 @@
+<div class="family-trees">
+    <h2>Мои семейные деревья:</h2>
+    <ul class="family-trees__group">
+        @if (createdTrees$ | async; as createdTreesResponse) {
+            @let createdTrees = createdTreesResponse.body;
+
+            @if (createdTrees !== null) {
+                @for (tree of createdTrees; track tree.id) {
+                    <app-tree-list-element 
+                        [name]="tree.name" 
+                        [treeId]="tree.id" 
+                        [isCreated]="true" 
+                        (grantPermission)="openGrantPermissonDialog($event)"
+                    ><div>ghbdtn</div></app-tree-list-element>
+                }
+            } @else {
+                <div>Вы ещё не создали ни одного древа :(</div>
+            }
+        }
+    </ul>
+  
+    <h2>Доступные семейные деревья:</h2>
+    <ul class="family-trees__group">
+        @if (availableTrees$ | async; as availableTreesResponse) {
+            @let availableTrees = availableTreesResponse.body;
+
+            @if (availableTrees !== null) {
+                @for (tree of availableTrees; track tree.id) {
+                    <app-tree-list-element [name]="tree.name" [treeId]="tree.id"></app-tree-list-element>
+                }
+            } @else {
+                <div>У вас пока нет доступа к другим деревьям :(</div>
+            }
+        }
+    </ul>
+</div>
+
+<app-grant-permission-dialog
+    [isShownModal]="isShownGrantPermissionDialog"
+    (closeModal)="closeGrantPermissionDialog()"
+    (submitGrantPermission)="grantPermission($event)"
+>
+</app-grant-permission-dialog>
+
+@if (renderMessage) {
+    <app-popup-message is-succeed="{{isSucceed}}" message="{{message}}"></app-popup-message>
+}
