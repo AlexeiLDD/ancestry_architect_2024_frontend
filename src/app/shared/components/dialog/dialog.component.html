@@ -1,0 +1,6 @@
+<dialog class="dialog" (click)="closeDialog()" #dialog>
+    <img class="dialog__close" src="close-x-svgrepo-com.svg" alt="close" (click)="closeDialog()">
+    <div class="dialog__wrapper" (click)="stopDialogPropagation($event)">
+        <ng-content/>
+    </div>
+</dialog>
