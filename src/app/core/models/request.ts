@@ -10,4 +10,11 @@ export namespace Request {
             passwordRepeat: string;
         }
     }
+
+    export namespace Tree {
+        export interface GrantPermission {
+            treeID: number;
+            email: string;
+        }
+    }
 }

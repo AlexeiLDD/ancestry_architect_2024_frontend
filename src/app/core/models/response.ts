@@ -1,5 +1,6 @@
 import { HttpStatusCode } from "@angular/common/http"
 import { UserInterace } from "./user"
+import { TreeListElement } from "./tree"
 
 export interface Response<T> {
     code: HttpStatusCode,
@@ -9,6 +10,10 @@ export interface Response<T> {
 export interface ErrorResponse {
     code: HttpStatusCode,
     status: string,
+}
+
+export interface SuccessResponse {
+    success: boolean,
 }
 
 export interface SeveralErrorsResponse {
@@ -37,3 +42,5 @@ export interface UpdateProfileResponse {
     user: UserInterace,
     profile: ProfileResponse
 }
+
+export type TreeListResponse = Array<TreeListElement> | null
