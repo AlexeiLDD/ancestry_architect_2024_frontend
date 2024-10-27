@@ -65,6 +65,11 @@ export namespace dSeeder {
         }
         return otherParents;
     }
+    function _getSpouses(rawData: Member[], preparedData: Member[]): Member[] {
+        return rawData
+            .filter((member) => member.spouseId !== undefined)
+            .filter((member) => preparedData.find((anotherMember) => anotherMember.id === member.id) === undefined);
+    }
     function _getRelatives(data: Member[], targetId?: number): Member[] {
         if (data.length === 0) {
             throw new Error("Data cannot be empty");
@@ -131,6 +136,9 @@ export namespace dSeeder {
             nextGeneration = nextGenerationChildren;
         } while (nextGeneration.length > 0);
 
+        const spouses = _getSpouses(data, members);
+        members.push(...spouses);
+
         return members;
     }
     function _combineIntoMarriages(data: Member[], options?: SeederOptions): TreeNode[] {
@@ -138,29 +146,17 @@ export namespace dSeeder {
             return data.map((member) => new TreeNode(member));
         }
 
-        let parentGroups = data.map((member) => {
-            return [member.parent1Id, member.parent2Id].filter((id) => id !== null);
-        }).filter((group) => group.length > 0);
-
-        parentGroups = [...new Set(parentGroups
-            // sort and stringify for comparison without iterating over each element
-            .map((group) => JSON.stringify(group.sort())))]
-            // parse elements back into objects
-            .map((group) => JSON.parse(group));
-
-        if (parentGroups.length === 0) {
-            throw new Error("At least one member must have at least one parent");
-        }
+        let parentGroups = data
+            .filter((member) => member.spouseId !== undefined)
+            .map(val => [val.spouseId, val.id]);
 
         const treeNodes = new Array<TreeNode>();
         parentGroups.forEach((currentParentGroup) => {
             const nodeId = currentParentGroup[0];
-            const node = new TreeNode(_getWithParentIds(data, nodeId), options);
+            const node = new TreeNode(_getWithParentIds(data, nodeId as number), options);
 
             const nodeMarriages = parentGroups.filter((group) => group.includes(nodeId));
             nodeMarriages.forEach((marriedCouple) => {
-                console.log(marriedCouple);
-
                 // remove marriage to prevent interating on it twice, 
                 //    except if it's currently being iterated by the outer forEach 
                 //       removing that would cause the next one to replaced as current and be skipped
@@ -191,7 +187,6 @@ export namespace dSeeder {
                     }
                     return false;
                 }).map((child) => new TreeNode(child, options));
-                console.log(marriage)
                 node.marriages.push(marriage);
             });
 
