@@ -1,5 +1,5 @@
 <header class="header">
-    <a class="header__logo" routerLink="/" routerLinkActive="router-link-active">
+    <a class="header__logo" [routerLink]="['/']">
         <img  src="logo.svg" alt="logo" height="40px">
     </a>
     <nav class="header__auth">
@@ -9,14 +9,14 @@
                 <div>{{username}}</div>
                 &#9660;
                 <div class="profile__content" [ngClass]="isActiveMenu ? 'profile__content--active': ''">
-                    <a routerLink="profile" routerLinkActive="router-link-active" >Профиль</a>
-                    <a href="#" >Избранное</a>
-                    <a [routerLink]="['/logout']" [queryParams]="{redirectUrl: currentUrl()}" routerLinkActive="router-link-active" class="logout" (click)="logout()">Выйти</a>
+                    <a [routerLink]="['profile']">Профиль</a>
+                    <a [routerLink]="['tree/list']">Список деревьев</a>
+                    <a [routerLink]="['/logout']" [queryParams]="{redirectUrl: currentUrl()}" class="logout" (click)="logout()">Выйти</a>
                 </div>
             </div>
         } @else {
-            <a class="auth-button" routerLink="/auth/login" routerLinkActive="router-link-active" >Вход</a>
-            <a class="auth-button" routerLink="/auth/signup" routerLinkActive="router-link-active" >Регистрация</a>
+            <a class="auth-button" [routerLink]="['/auth/login']" >Вход</a>
+            <a class="auth-button" [routerLink]="['/auth/signup']" >Регистрация</a>
         }
     </nav>
 </header>

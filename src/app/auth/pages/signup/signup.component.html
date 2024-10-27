@@ -5,7 +5,7 @@
             <img src="logo.svg" />
         </h2>
         <div>
-            Есть аккаунт? <a routerLink="/auth/login" routerLinkActive="active" ariaCurrentWhenActive="page"> Авторизируйтесь </a>
+            Есть аккаунт? <a [routerLink]="['/auth/login']"> Авторизируйтесь </a>
         </div> 
     </div>  
     <form class="form" [formGroup]="profileForm" (ngSubmit)="signup()" (change)="onChange()" (input)="onChange()" (blur)="onChange()">
