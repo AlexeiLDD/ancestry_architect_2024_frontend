@@ -8,7 +8,7 @@ import { User } from '../../../../core/models/user';
 import { PendingSubmitAnimationBase } from '../../../../auth/shared/pending-submit-animation-base';
 import { DateModule } from '../../../../shared/modules/date';
 import { UpdateProfileResponse, Response, SeveralErrorsResponse } from '../../../../core/models/response';
-import { PopupMessageComponent } from '../../../../shared/components/popup-message/popup-message/popup-message.component';
+import { PopupMessageComponent } from '../../../../shared/components/popup-message/popup-message.component';
 
 
 const SubmitButtonTitle = 'Обновить профиль';
