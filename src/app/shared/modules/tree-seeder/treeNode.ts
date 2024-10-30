@@ -1,4 +1,4 @@
-import { Member } from "./member";
+import { Member } from "../../../core/models/tree";
 import { SeederOptions } from "./seederOptions";
 
 export class TreeNode {
