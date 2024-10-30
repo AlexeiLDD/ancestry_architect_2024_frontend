@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpStatusCode } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { UserInterace, User } from '../../models/user';
+import { UserInterface, User } from '../../models/user';
 import { Response, UserResponse } from './../../../core/models/response';
 import { AuthService } from '../../../auth/services/auth/auth.service';
 
@@ -9,7 +9,7 @@ import { AuthService } from '../../../auth/services/auth/auth.service';
   providedIn: 'root'
 })
 export class UserService {
-  private user: UserInterace | undefined; 
+  private user: UserInterface | undefined; 
 
   observableUser$!: Observable<Response<UserResponse>>;
   userIsFetched = false;
@@ -34,13 +34,13 @@ export class UserService {
     return this.user !== undefined;
   }
 
-  set User(user: UserInterace) {
+  set User(user: UserInterface) {
     this.user = new User(user);
   }
 
 
 
-  get User(): UserInterace | undefined {
+  get User(): UserInterface | undefined {
     return this.user;
   }
 

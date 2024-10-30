@@ -1,6 +1,6 @@
 import { HttpStatusCode } from "@angular/common/http"
-import { UserInterace } from "./user"
-import { TreeListElement } from "./tree"
+import { UserInterface } from "./user"
+import { TreeExcerpt } from "./tree"
 
 export interface Response<T> {
     code: HttpStatusCode,
@@ -12,18 +12,18 @@ export interface ErrorResponse {
     status: string,
 }
 
-export interface SuccessResponse {
-    success: boolean,
-}
-
 export interface SeveralErrorsResponse {
     code: HttpStatusCode,
     errors: Array<string>,
 }
 
+export interface SuccessResponse {
+    success: boolean,
+}
+
 export interface UserResponse {
     isAuth: boolean,
-    user: UserInterace,
+    user: UserInterface,
     name: string,
     surname: string,
 }
@@ -39,8 +39,10 @@ export interface ProfileResponse {
 }
 
 export interface UpdateProfileResponse {
-    user: UserInterace,
+    user: UserInterface,
     profile: ProfileResponse
 }
 
-export type TreeListResponse = Array<TreeListElement> | null
+export type CreateTreeResponse = TreeExcerpt
+
+export type TreeListResponse = Array<TreeExcerpt> | null

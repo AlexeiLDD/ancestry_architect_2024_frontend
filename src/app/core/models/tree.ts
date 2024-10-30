@@ -1,5 +1,5 @@
 
-export interface TreeListElement {
+export interface TreeExcerpt {
     id: number,
     user_id: number,
     name: string

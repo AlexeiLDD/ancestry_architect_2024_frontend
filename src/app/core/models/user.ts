@@ -1,5 +1,5 @@
 
-export interface UserInterace {
+export interface UserInterface {
     id: number,
     email: string,
     name?: string,
@@ -7,14 +7,14 @@ export interface UserInterace {
     dateOfBirth?: Date,
 }
 
-export class User implements UserInterace{
+export class User implements UserInterface{
     id: number;
     email: string;
     name?: string;
     surname?: string;
     dateOfBirth?: Date;
 
-    constructor({ id, email }: UserInterace ){
+    constructor({ id, email }: UserInterface ){
         this.id = id;
         this.email = email;
     }
