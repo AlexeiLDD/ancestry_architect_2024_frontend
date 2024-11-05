@@ -1,0 +1,47 @@
+@use './../../../shared/styles/forms';
+@use './../../../shared/styles/button';
+
+.form-wrapper {
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 0px;
+
+    .form{
+        padding: 20px;
+        display: flex;
+        flex-direction:column;
+        justify-content: center;
+        align-items: stretch;
+        gap: 10px;
+        width: 270px;
+
+        &__input{
+            @include forms.text-input;
+            width: 250px;
+        }
+
+        &__label{
+            @include forms.label();
+        }
+
+        &__button-confirm {
+            @include button.button-confirmed();
+            font-size: 16px;
+            margin: 10px 60px;
+            width: fit-content;
+            z-index: 1;
+        }
+
+        .alert{
+            background: rgb(249,195,195);
+            background: linear-gradient(68deg, rgba(249,195,195,1) 0%, rgba(254,217,217,1) 50%, rgba(252,69,69,1) 100%);
+            border-color: darkgrey;
+            border-radius: 6px;
+            padding: 6px;
+            transform: translateX(0%);
+            transition: transform ease-out 1s;
+        }
+    }
+}

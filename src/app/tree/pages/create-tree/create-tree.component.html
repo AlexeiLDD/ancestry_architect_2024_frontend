@@ -1,0 +1,13 @@
+<div class="form-wrapper">
+    <img src="tree-of-hand-draw-foliage-circles-svgrepo-com.svg" alt="tree" width="300px">
+    <form class="form" [formGroup]="createTreeForm" (ngSubmit)="submitCreateTreeForm()">
+        <label class="form__label" for="email">Введите&nbsp;название&nbsp;нового семейного древа</label>
+        <input class="form__input" type="text" name="name" formControlName="name" />
+        @if (errorMessage !== '') {
+            <div class="alert" >
+                {{errorMessage}}
+            </div>
+        }
+        <button type="submit" class="form__button-confirm" [disabled]="!createTreeForm.valid">Создать&nbsp;древо</button>
+    </form>
+</div>
