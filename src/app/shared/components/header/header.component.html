@@ -2,21 +2,26 @@
     <a class="header__logo" [routerLink]="['/']">
         <img  src="logo.svg" alt="logo" height="40px">
     </a>
+    <a class="header__create-tree" [routerLink]="['tree', 'create']">
+        <img  src="tree-silhouette-of-circular-leaves-svgrepo-com.svg" alt="tree" height="30px">
+        <div>Создать древо</div>
+    </a>
     <nav class="header__auth">
         @if (isAuth()) {
-            <div class="profile" (click)="activateDropdownMenu()" (mouseleave)="disabledDropdownMenu()">
+            <div class="profile" (click)="activateDropdownMenu()" (clickOutside)="disabledDropdownMenu()">
                 <img class="profile__avatar" src="avatar.webp" alt="avatar" height="30px" width="30px">
                 <div>{{username}}</div>
                 &#9660;
-                <div class="profile__content" [ngClass]="isActiveMenu ? 'profile__content--active': ''">
-                    <a [routerLink]="['profile']">Профиль</a>
-                    <a [routerLink]="['tree/list']">Список деревьев</a>
-                    <a [routerLink]="['/logout']" [queryParams]="{redirectUrl: currentUrl()}" class="logout" (click)="logout()">Выйти</a>
+                <div class="profile__content" [ngClass]="isActiveMenu ? 'profile__content--active': ''" (click)="disabledDropdownMenu($event)">
+                    <a class="profile__element" [routerLink]="['tree', 'list']">Список деревьев</a>
+                    <a class="profile__element" [routerLink]="['profile']">Профиль</a>
+                    <hr/>
+                    <a class="profile__element" [routerLink]="['logout']" [queryParams]="{redirectUrl: currentUrl()}" (click)="logout()">Выйти</a>
                 </div>
             </div>
         } @else {
-            <a class="auth-button" [routerLink]="['/auth/login']" >Вход</a>
-            <a class="auth-button" [routerLink]="['/auth/signup']" >Регистрация</a>
+            <a class="auth-button" [routerLink]="['auth', 'login']" >Вход</a>
+            <a class="auth-button" [routerLink]="['auth', 'signup']" >Регистрация</a>
         }
     </nav>
 </header>

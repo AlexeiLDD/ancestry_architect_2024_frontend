@@ -3,7 +3,7 @@
 .header {
     padding: 10px 4vw 10px 4vw;
     display: grid;
-    grid-template: "logo logo logo auth";
+    grid-template: "logo create auth";
     position: fixed;
     top: 0px;
     left: 0px;
@@ -13,11 +13,37 @@
     background: linear-gradient(68deg, rgba(249,195,195,1) 0%, rgba(254,217,217,1) 50%, rgba(252,69,69,1) 100%);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Тень для добавления глубины
     border-radius: 0px 0px 5px 5px;
+    z-index: 10;
 
     &__logo{
         grid-area: logo;
         display: flex;
         align-items: center;
+    }
+
+    &__create-tree{
+        grid-area: create;
+        display: flex;
+        width: fit-content;
+        padding: 0px 10px;
+        align-items: center;
+        gap: 5px;
+        border-radius: 8px;
+        border: solid;
+        border-color: black;
+        color: black;
+        text-decoration: none;
+        transition: all 0.3s ease-in-out;
+
+        &:hover{
+            @include button.button-confirmed();
+            cursor: pointer;
+
+            img{
+                filter: invert(100%) sepia(96%) saturate(1%) hue-rotate(257deg) brightness(106%) contrast(101%);
+                transition: all 0.3s ease-in-out;
+            }
+        }
     }
 
     &__auth{
@@ -57,28 +83,51 @@
                 z-index: 1;
                 max-height: none;
                 position: absolute;
-                padding: 20px 20px 20px 20px;
                 top: 78%;
-                right: 4vw;
                 cursor: default;
             
                 transform: translateY(10px);
                 border-radius: 8px;
-                background-color: rgb(255, 255, 255);
-                border: 1px solid rgb(235, 235, 235);
+                background-color: #f0f0f0;
+                border: 1px solid #cfcfcf;
+               
+                overflow: hidden;
                 animation-name: hYfEzu;
                 animation-duration: 0.2s;
-                min-width: 228px;
+                min-width: 270px;
 
                 &--active{
                     display: flex !important;
                     flex-direction: column;
                     justify-items: center;
-                    align-items:start;
-                    gap: 10px;
+                    align-items: start;
+                }
+            }
+
+            &__element{
+                padding: 10px 20px 10px 20px;
+                width: 100%;
+                color: black;
+                text-decoration: none;
+
+                &::before {
+                    content: "• ";
+                }
+
+                &:hover {
+                    transition: background-color 0.2s ease-in-out;
+                    background-color: #cfcfcf;
+                    cursor: pointer;
                 }
             }
         }
+    }
+
+    hr {
+        color: black;
+        z-index: 100;
+        margin: 0px;
+        width: 100%;
     }
 }
 

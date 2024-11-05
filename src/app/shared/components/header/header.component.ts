@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AsyncPipe, NgClass } from '@angular/common';
-import { Observable } from 'rxjs';
 import { UserService } from '../../../core/services/user/user.service';
-import { Response, UserResponse } from '../../../core/models/response';
+import { ClickOutsideDirective } from '../../directives/click-outside/click-outside.directive';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, AsyncPipe, NgClass],
+  imports: [RouterLink, AsyncPipe, NgClass, ClickOutsideDirective],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -32,7 +31,11 @@ export class HeaderComponent {
     this.isActiveMenu = true;
   }
 
-  disabledDropdownMenu() {
+  disabledDropdownMenu(event?: MouseEvent) {
+    if (event !== undefined) {
+      event.stopImmediatePropagation();
+    }
+    
     this.isActiveMenu = false;
   }
 
@@ -41,8 +44,6 @@ export class HeaderComponent {
   }
 
   logout() {
-    this.disabledDropdownMenu();
-
     this.userService.logout();
   }
 }

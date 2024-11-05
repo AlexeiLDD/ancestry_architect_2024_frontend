@@ -123,7 +123,12 @@ export class ProfileComponent extends PendingSubmitAnimationBase {
       },
       error: (err) => {
         if (err.status === HttpStatusCode.BadRequest) {
-          this.message = (err.error as SeveralErrorsResponse).errors.join('. ');
+          try {
+            this.message = (err.error as SeveralErrorsResponse).errors.join('. ');
+          } catch (err) {
+            this.message = UnknownError;
+          }
+          
           this.isSucceed = false;
         }
 
