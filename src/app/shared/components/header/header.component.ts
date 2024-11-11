@@ -7,7 +7,7 @@ import { ClickOutsideDirective } from '../../directives/click-outside/click-outs
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, AsyncPipe, NgClass, ClickOutsideDirective],
+  imports: [RouterLink, NgClass, ClickOutsideDirective],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

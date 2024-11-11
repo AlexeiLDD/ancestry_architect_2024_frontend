@@ -6,7 +6,7 @@ import { DialogComponent } from '../../../shared/components/dialog/dialog.compon
 @Component({
   selector: 'app-grant-permission-dialog',
   standalone: true,
-  imports: [DialogComponent, ReactiveFormsModule, NgClass],
+  imports: [ReactiveFormsModule, NgClass],
   templateUrl: './grant-permission-dialog.component.html',
   styleUrl: './grant-permission-dialog.component.scss'
 })

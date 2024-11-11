@@ -1,4 +1,4 @@
-import { Member } from "../../../core/models/tree";
+import { Member } from "../../../core/models/node";
 import { SeederOptions } from "./seederOptions";
 
 export class TreeNode {
@@ -88,4 +88,5 @@ export class TreeNodeMarriage {
     }
     spouse: TreeNode | null;
     children: TreeNode[];
+    extra?: { mainId: number, spouseId: number };
 }

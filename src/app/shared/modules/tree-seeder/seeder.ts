@@ -1,4 +1,4 @@
-import { Member } from "../../../core/models/tree";
+import { Member } from "../../../core/models/node";
 import { SeederOptions } from "./seederOptions";
 import { TreeNode, TreeNodeMarriage } from "./treeNode";
 
@@ -170,6 +170,7 @@ export namespace dSeeder {
                 const spouseId = marriedCouple[1];
                 if (spouseId !== undefined) {
                     marriage.spouse = new TreeNode(_getWithParentIds(data, spouseId), options);
+                    marriage.extra = { mainId: nodeId as number, spouseId: marriage.spouse.id };
                 }
 
                 marriage.children = data.filter((member) => {

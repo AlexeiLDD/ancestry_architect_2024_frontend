@@ -3,8 +3,8 @@
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border-radius: 10px; // Закругленные углы для полей ввода
-    border: 1px solid #ddd; // Светло-серый бордер для полей ввода
+    border-radius: 10px; 
+    border: 1px solid #ddd; 
 
     &--valid{
         border-width: 3px;
@@ -13,6 +13,5 @@
 }
 
 @mixin label {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: bold;
 }
