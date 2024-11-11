@@ -1,3 +1,4 @@
+import { Node } from "./node";
 
 export interface TreeExcerpt {
     id: number,
@@ -5,14 +6,14 @@ export interface TreeExcerpt {
     name: string
 }
 
-export interface Member {
+export interface Tree {
     id: number;
-    name?: string;
-    parent1Id: number | null;
-    parent2Id: number | null;
-    spouseId?: number;
-    gender?: string;
-    date?: string;
-    nickname?: string;
-    depthOffset?: number;
+    name: string;
+    layers: Array<Layer>;
+}
+
+export interface Layer {
+    id: number;
+    number: number;
+    nodes: Array<Node>;
 }

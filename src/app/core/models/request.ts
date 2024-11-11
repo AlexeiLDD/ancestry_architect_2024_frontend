@@ -16,5 +16,9 @@ export namespace Request {
             treeID: number;
             email: string;
         }
+
+        export interface CreateTree {
+            name: string;
+        }
     }
 }

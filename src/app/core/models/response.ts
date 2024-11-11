@@ -1,6 +1,6 @@
 import { HttpStatusCode } from "@angular/common/http"
 import { UserInterface } from "./user"
-import { TreeExcerpt } from "./tree"
+import { Tree, TreeExcerpt } from "./tree"
 
 export interface Response<T> {
     code: HttpStatusCode,
@@ -43,6 +43,13 @@ export interface UpdateProfileResponse {
     profile: ProfileResponse
 }
 
-export type CreateTreeResponse = TreeExcerpt
+export type CreateTreeResponse = TreeExcerpt;
 
-export type TreeListResponse = Array<TreeExcerpt> | null
+export type TreeListResponse = Array<TreeExcerpt> | null;
+
+export type GetTreeResponse = Tree;
+
+export interface NodeDescriptionResponse {
+    nodeID: number,
+    description: string
+}
