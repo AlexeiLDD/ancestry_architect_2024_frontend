@@ -1,5 +1,5 @@
 <div class="tree-element" [ngClass]="isCreated ? 'tree-element--created' : 'tree-element--available'">
-    <a [routerLink]="['tree', treeId]" class="tree-element__link">{{name}}</a>
+    <a [routerLink]="['/', 'tree', treeId]" class="tree-element__link">{{name}}</a>
     @if (isCreated) {
         <img class="tree-element__menu-open" src="kebab-menu-svgrepo-com.svg" alt="menu" #menu (click)="openMenu()">
     }
