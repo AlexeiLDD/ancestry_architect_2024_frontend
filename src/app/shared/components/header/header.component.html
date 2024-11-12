@@ -9,7 +9,11 @@
     <nav class="header__auth">
         @if (isAuth()) {
             <div class="profile" (click)="activateDropdownMenu()" (clickOutside)="disabledDropdownMenu()">
-                <img class="profile__avatar" src="avatar.webp" alt="avatar" height="30px" width="30px">
+                @if (avatarPath !== '') {
+                    <img class="profile__avatar" src="{{avatarPath}}" alt="avatar" height="30px" width="30px">
+                } @else {
+                    <img class="profile__avatar" src="avatar.webp" alt="avatar" height="30px" width="30px">
+                }
                 <div>{{username}}</div>
                 &#9660;
                 <div class="profile__content" [ngClass]="isActiveMenu ? 'profile__content--active': ''" (click)="disabledDropdownMenu($event)">

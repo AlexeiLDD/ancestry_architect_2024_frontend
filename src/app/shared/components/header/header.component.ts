@@ -23,6 +23,10 @@ export class HeaderComponent {
     return this.userService.username;
   }
 
+  get avatarPath(): string {
+    return this.userService.avatarPath as string;
+  }
+
   isAuth(): boolean {
     return this.userService.isAuth();
   }

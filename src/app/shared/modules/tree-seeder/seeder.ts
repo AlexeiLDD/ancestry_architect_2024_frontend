@@ -119,6 +119,9 @@ export namespace dSeeder {
         members.push(...children);
 
         if (children.length === 0) {
+            const spouses = _getSpouses(data, members);
+            members.push(...spouses);
+            
             return members;
         }
 
@@ -143,7 +146,7 @@ export namespace dSeeder {
     }
     function _combineIntoMarriages(data: Member[], options?: SeederOptions): TreeNode[] {
         if (data.length === 1) {
-            return data.map((member) => new TreeNode(member));
+            return data.map((member) => new TreeNode(member, options));
         }
 
         let parentGroups = data

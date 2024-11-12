@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TreeService } from '../../services/tree/tree.service';
@@ -10,7 +9,7 @@ const UnknownErrorMessage = 'Что-то пошло не так :( Попроб�
 @Component({
   selector: 'app-create-tree',
   standalone: true,
-  imports: [ReactiveFormsModule, NgClass],
+  imports: [ReactiveFormsModule],
   templateUrl: './create-tree.component.html',
   styleUrl: './create-tree.component.scss'
 })

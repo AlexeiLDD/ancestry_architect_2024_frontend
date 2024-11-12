@@ -9,7 +9,8 @@ import { AuthService } from '../../../auth/services/auth/auth.service';
   providedIn: 'root'
 })
 export class UserService {
-  private user: UserInterface | undefined; 
+  private user?: UserInterface;
+  avatarPath?: string; 
 
   observableUser$!: Observable<Response<UserResponse>>;
   userIsFetched = false;
@@ -25,6 +26,7 @@ export class UserService {
           this.User = value.body.user;
           this.User.name = value.body.name;
           this.User.surname = value.body.surname;
+          this.avatarPath = value.body.avatarPath;
         }
       },
     });

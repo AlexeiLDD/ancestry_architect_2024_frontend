@@ -20,12 +20,18 @@ body {
     align-items: center;
     height:150px;
     width:100%;
+    cursor: pointer;
 
     &__avatar {
         border-radius: 50%;
         border: solid;
         background-color: aliceblue;
         padding: 5px;
+        object-fit: cover;
+    }
+
+    &__date {
+        font-size: xx-small;
     }
 }
 
@@ -36,6 +42,10 @@ body {
 .marriage {
     fill: none;
     stroke: rgb(158, 39, 39);
+
+    &Node {
+        cursor: pointer;
+    }
 }
 .man {
     background-color: lightblue;
