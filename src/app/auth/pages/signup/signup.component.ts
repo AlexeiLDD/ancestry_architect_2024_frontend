@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgClass, NgIf, NgStyle } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { HttpStatusCode } from '@angular/common/http';
 import { PendingSubmitAnimationBase } from '../../shared/pending-submit-animation-base';
@@ -19,7 +19,7 @@ const UnknownErrorMessage = 'Что-то пошло не так :( Попроб�
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
   standalone: true,
-  imports: [ReactiveFormsModule, NgStyle, NgClass, NgIf, RouterLink],
+  imports: [ReactiveFormsModule, NgClass, NgIf, RouterLink],
 })
 export class SignupComponent extends PendingSubmitAnimationBase {
   override submitButtonTitle = SubmitButtonTitle;
@@ -74,7 +74,7 @@ export class SignupComponent extends PendingSubmitAnimationBase {
 
           clearInterval(animationTimeout); 
           
-          this.router.navigateByUrl('/');
+          this.router.navigate(['/', 'tree', 'list']);
         }
       },
       error: () => {

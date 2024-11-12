@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgClass, NgIf, NgStyle } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
 import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { PendingSubmitAnimationBase } from '../../shared/pending-submit-animation-base';
@@ -18,7 +18,7 @@ const WrongCredentialsErrorMessage = 'Неверный Email или пароль
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   standalone: true,
-  imports: [ReactiveFormsModule, NgStyle, NgClass, NgIf, RouterLink],
+  imports: [ReactiveFormsModule, NgClass, NgIf, RouterLink],
 })
 export class LoginComponent extends PendingSubmitAnimationBase {
   override submitButtonTitle = SubmitButtonTitle;
@@ -62,7 +62,7 @@ export class LoginComponent extends PendingSubmitAnimationBase {
 
           clearInterval(animationTimeout); 
           
-          this.router.navigateByUrl('/');
+          this.router.navigate(['/', 'tree', 'list']);
         }
       },
       error: (err: HttpErrorResponse) => {
