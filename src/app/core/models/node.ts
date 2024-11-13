@@ -12,9 +12,32 @@ export interface Node {
 }
 
 interface RelativesList {
-    spouses: Array<number>;
-    parents: Array<number>;
-    children: Array<number>;
+    spouses: number[];
+    parents: number[];
+    children: number[];
+}
+
+export interface CreateNode {
+    isFirstNode: boolean;
+    treeID: number;
+    name: string;
+    isSpouse: boolean;
+    gender: string;
+    addition: CreateAddition;
+    relatives: CreateRelativesList;
+}
+
+interface CreateAddition {
+    birthdate: string;
+    deathdate: string | null;
+    description: string;
+}
+
+export interface CreateRelativesList {
+    spouses: number[] | null;
+    parents: number[] | null;
+    children: number[] | null;
+    siblings: null;
 }
 
 export interface Member {
@@ -29,6 +52,7 @@ export interface Member {
     gender: string;
     date?: string;
     nickname?: string;
+    previewPath: string;
     depthOffset?: number;
 }
 
@@ -41,4 +65,5 @@ export interface MemberExcerpt {
     spouseId?: number;
     date?: string;
     nickname?: string;
+    previewPath: string;
 }

@@ -1,3 +1,4 @@
+import { CreateNode } from "./node";
 
 export namespace Request {
     export namespace Auth {
@@ -20,5 +21,17 @@ export namespace Request {
         export interface CreateTree {
             name: string;
         }
+    }
+
+    export namespace Node {
+        export interface Edit {
+            name: string;
+            birthdate: string;
+            deathdate: string | null;
+            description: string;
+            gender: string;
+        }
+
+        export type Create = CreateNode;
     }
 }
