@@ -1,0 +1,81 @@
+@use "./../../../shared/styles/avatar";
+@use "./../../../shared/styles/button";
+
+
+$font-family: Arial, sans-serif;
+$color-primary: #3498db;
+
+.node-info {
+    padding-top: 100px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__title {
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+}
+
+.avatar{
+    @include avatar.avatar();
+}
+
+.node-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: center;
+    min-width: 200px;
+    width: 80vw;
+    max-width: 400px;
+    padding-bottom: 100px;
+
+    &__item {
+        margin-bottom: 15px;
+        padding: 0px 20px 0px 20px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    &__text {
+        height: 400px;
+    }
+
+    &__label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    &__input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+
+        &--select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            padding: 10px 50px 10px 10px;
+            cursor: pointer;
+        }
+
+        &--file {
+            grid-area: avatar;
+            cursor: pointer;
+        }
+    }
+
+    &__submit {
+        max-height: 50px;
+        margin: 10px;
+        @include button.button-confirmed();
+    }
+}
