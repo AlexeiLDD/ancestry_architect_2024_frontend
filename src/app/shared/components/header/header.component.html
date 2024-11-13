@@ -1,11 +1,13 @@
 <header class="header">
     <a class="header__logo" [routerLink]="['/']">
-        <img  src="logo.svg" alt="logo" height="40px">
+        <img  src="logo.svg" alt="logo" height="40px" width="220px">
     </a>
-    <a class="header__create-tree" [routerLink]="['tree', 'create']">
-        <img  src="tree-silhouette-of-circular-leaves-svgrepo-com.svg" alt="tree" height="30px">
-        <div>Создать древо</div>
-    </a>
+    <div class="header__create-tree-wrapper">
+        <a class="header__create-tree" [routerLink]="['tree', 'create']">
+            <img  src="tree-silhouette-of-circular-leaves-svgrepo-com.svg" alt="tree" height="30px">
+            <div>Создать древо</div>
+        </a>
+    </div>  
     <nav class="header__auth">
         @if (isAuth()) {
             <div class="profile" (click)="activateDropdownMenu()" (clickOutside)="disabledDropdownMenu()">
