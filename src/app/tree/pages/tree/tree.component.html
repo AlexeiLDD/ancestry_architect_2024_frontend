@@ -1,0 +1,53 @@
+@if (tree?.layers === null) {
+    <div class="first-node">
+        <div>Пока в этом древе нет ни одного родственника</div>
+        <a class="first-node__button" [routerLink]="['node']" [queryParams]="{type: 'first'}">
+            Добавить первого родственника!
+        </a>
+    </div>
+} 
+<div id="tree" #treeCont (contextmenu)="getPointerCoordinates($event)"></div>
+
+
+@if (contextMenuIsRendered) {
+    <div class="edit-menu" 
+        (clickOutside)="closeContextMenu()" 
+        [ngStyle]="contextMenuCoordinates"
+    >
+        @if (currentMember?.spouseId === undefined) {
+            <div class="edit-menu__item">
+                <a [routerLink]="['node']" [queryParams]="{type: 'spouse', spouseId: currentMember?.id}">Добавить супруга</a>
+            </div>
+        }   
+        @if (currentMember?.spouseId === undefined && !currentMember?.hasParents) {
+            <div class="edit-menu__item">
+                <a [routerLink]="['/']">Добавить родителей</a>
+            </div>
+        }
+        <div class="edit-menu__item">
+            <a [routerLink]="['node', currentMember?.id]" [queryParams]="{type: 'edit'}">Редактировать</a>
+        </div>
+        @if (canDelete()) {
+            <hr>
+            <div class="edit-menu__item">
+                <a (click)="deleteNode()">Удалить</a>
+            </div>
+        }
+    </div>
+}
+
+
+<app-dialog
+    [isShownModal]="isShownDescriptionDialog"
+    (closeModal)="closeDescriptionDialog()"
+>
+    <div class="description">
+        <h2 class="description__name">{{currentMember?.name}}</h2>
+        <h3 class="description__date">{{currentMember?.date}}</h3>
+        <p class="description__text"></p>
+        @if (descriptionText$ | async; as descriptionResponse) {
+            @let description = descriptionResponse.body;
+            <p class="description__text">{{description.description}}</p>
+        }
+    </div>
+</app-dialog>
