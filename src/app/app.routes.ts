@@ -5,6 +5,9 @@ import { ProfileComponent } from './profile/pages/profile/profile/profile.compon
 import { TreeListComponent } from './tree/pages/tree-list/tree-list.component';
 import { LogoutRequiredService } from './shared/services/logout-required/logout-required.service';
 import { LoginRequiredService } from './shared/services/login-required/login-required.service';
+import { CreateTreeComponent } from './tree/pages/create-tree/create-tree.component';
+import { TreeComponent } from './tree/pages/tree/tree.component';
+import { EditNodeComponent } from './tree/pages/edit-node/edit-node.component';
 
 const loginRequiredRoutes: Routes = [
   {
@@ -17,6 +20,30 @@ const loginRequiredRoutes: Routes = [
     path: 'tree/list',
     title: 'Список деревьев',
     component: TreeListComponent,
+    canActivate: [LoginRequiredService]
+  },
+  {
+    path: 'tree/create',
+    title: 'Создать дерево',
+    component: CreateTreeComponent,
+    canActivate: [LoginRequiredService]
+  },
+  {
+    path: 'tree/:id',
+    title: 'Семейное древо',
+    component: TreeComponent,
+    canActivate: [LoginRequiredService]
+  },
+  {
+    path: 'tree/:id/node',
+    title: 'Добавить родственника',
+    component: EditNodeComponent,
+    canActivate: [LoginRequiredService]
+  },
+  {
+    path: 'tree/:id/node/:nodeId',
+    title: 'Добавить родственника',
+    component: EditNodeComponent,
     canActivate: [LoginRequiredService]
   }
 ];
