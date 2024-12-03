@@ -6,6 +6,7 @@
         </a>
     </div>
 } 
+    
 <div id="tree" #treeCont (contextmenu)="getPointerCoordinates($event)"></div>
 
 
@@ -21,7 +22,7 @@
         }   
         @if (currentMember?.spouseId === undefined && !currentMember?.hasParents) {
             <div class="edit-menu__item">
-                <a [routerLink]="['/']">Добавить родителей</a>
+                <a [routerLink]="['node', 'parents']" [queryParams]="{childId: currentMember?.id}">Добавить родителей</a>
             </div>
         }
         <div class="edit-menu__item">

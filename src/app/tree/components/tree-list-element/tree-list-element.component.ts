@@ -23,7 +23,7 @@ export class TreeListElementComponent {
   menuCoordinates = {
     'top.px': 0,
     'left.px': 0,
-  }
+  };
 
   constructor() {}
 

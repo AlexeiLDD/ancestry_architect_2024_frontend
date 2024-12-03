@@ -8,7 +8,7 @@
                 <img class="avatar" ngSrc="avatar.webp" alt="avatar" height="300" width="300" priority/>
             }
             <label class="node-form__label" for="avatar">Аватар:</label>
-            <input type="file" id="avatar" name="avatar" accept="image/*" (change)="loadAvatar($event)" class="node-form__input node-form__input--file" formControlName="previewPath">
+            <input type="file" id="avatar" name="avatar" accept="image/*" (change)="loadAvatar($event)" class="node-form__input--file" formControlName="previewPath">
         </div>
         <div class="node-form__item node-form__item--end">
             <label class="node-form__label" for="name">Имя:</label>

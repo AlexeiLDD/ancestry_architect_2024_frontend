@@ -1,5 +1,5 @@
 <section class="profile-info">
-    <img src="profile.svg" alt="logo" height="50px" width="200px">
+    <h2>Профиль</h2>
     <form class="profile-form" [formGroup]="profileForm">
         <div class="profile-form__item profile-form__item--end">
             <label class="profile-form__label" for="email">Email:</label>
@@ -32,7 +32,7 @@
                 <img class="avatar" ngSrc="avatar.webp" alt="avatar" height="300" width="300" priority/>
             }
             <label class="profile-form__label" for="avatar">Аватар:</label>
-            <input type="file" id="avatar" name="avatar" accept="image/*" (change)="loadAvatar($event)" class="profile-form__input profile-form__input--file" formControlName="avatarPath">
+            <input type="file" id="avatar" name="avatar" accept="image/*" (change)="loadAvatar($event)" class="profile-form__input--file" formControlName="avatarPath">
         </div>
         <button type="submit" class="profile-form__submit" (click)="updateProfile()">{{submitButtonTitle}}</button>
     </form>

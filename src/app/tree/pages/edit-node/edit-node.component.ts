@@ -226,15 +226,12 @@ export class EditNodeComponent extends PendingSubmitAnimationBase {
       if (value.code === HttpStatusCode.Ok){
         const { id } = value.body;
         if (this.nodeForm.controls.previewPath.value !== '') {
-          this.nodeService.updatePreview(id, this.nodeFormData).subscribe(() => { 
-            this.router.navigate(['/', 'tree', this.treeId]);
-          });
-        } else {
-          this.router.navigate(['/', 'tree', this.treeId]);
-        }
+          this.nodeService.updatePreview(id, this.nodeFormData).subscribe(() => {});
+        } 
 
         this.message = SucceedMessage;
         this.isSucceed = true;
+        this.router.navigate(['/', 'tree', this.treeId]);
       } else {
         this.message = UnknownError;
         this.isSucceed = false;
