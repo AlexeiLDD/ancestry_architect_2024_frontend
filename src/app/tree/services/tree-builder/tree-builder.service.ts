@@ -1,6 +1,6 @@
+import dTree from 'd3-dtree';
 import { SeederOptions } from '../../../shared/modules/tree-seeder/seederOptions';
 import { Tree } from '../../../core/models/tree';
-import dTree from 'd3-dtree';
 import { dSeeder } from '../../../shared/modules/tree-seeder/seeder';
 import { deepOmit } from '../../../shared/modules/deep-omit';
 import { DateModule } from '../../../shared/modules/date';
@@ -51,12 +51,10 @@ export class TreeBuilderService {
   init(contId: string, data: Tree) {
     const { memberList, targetId } = this.initData(data);
 
-    let treeData: Record<string, any> = dSeeder.seed(memberList, targetId, this.dSeederOptions) as Record<string, any>;
+    const treeData = this.initTreeData(memberList, targetId);
 
-    treeData = deepOmit(treeData, 'depthOffset');
-
-    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) - 100
-    const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0) - 60
+    const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) - 100;
+    const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0) - 60;
     
     dTree.init(treeData, {
       target: contId,
@@ -67,56 +65,80 @@ export class TreeBuilderService {
       hideMarriageNodes: false,
       marriageNodeSize: 50,
       callbacks: {
-        nodeClick: (name: string, extra: MemberExcerpt) => {
-          this.callbackFunctions.sharedNodeEmit(extra);
-          this.callbackFunctions.clickNodeEmit(extra);
-        },
-        nodeRightClick: (name: string, extra: MemberExcerpt) => {
-          this.callbackFunctions.sharedNodeEmit(extra);
-          this.callbackFunctions.contextNodeEmit(extra);
-        },
-        marriageClick: (extra: any) => {
-          this.callbackFunctions.marriageEmit(extra);
-        },
-        textRenderer: function(name: string, extra: MemberExcerpt, textClass: string) {
-          const date = extra?.date || '';
-
-          let extendedName = name;
-          if (extra && extra.nickname) {
-            extendedName += ` (${extra.nickname})`;
-          }
-
-          let previewPath = 'avatar.webp';
-          if (extra && extra?.previewPath !== '') {
-            previewPath = extra.previewPath;
-          }
-
-          return `
-          <div class="node">
-            <img class="node__avatar" src="${previewPath}" alt="text" height="50px" width="50px"> 
-            <p align="center" class="${textClass}">${extendedName}<div class="node__date">${date}</div></p>
-          </div>
-          `;
-        },
-        nodeRenderer: function(name: any, x: any, y: any, height: any, width: any, extra: any, id: string, nodeClass: string, textClass: any, textRenderer: (arg0: any, arg1: any, arg2: any) => string) {
-          return `
-            <div style="height:100px;width:100%;" class="${textClass}" id="node${id}">
-              ${textRenderer(name, extra, nodeClass)}
-            </div>
-          `;
-        },
-        marriageRenderer (x: any, y: any, height: any, width: any, extra: any, id: any, nodeClass: any) {
-          return `
-            <div style="height:100%" class="${nodeClass}" id="node${id}">
-              <img src="new-user-svgrepo-com.svg" alt="text" height="50px" width="50px"> 
-            </div>
-          `;
-        },
-      }
+        nodeClick: this.nodeClick.bind(this),
+        nodeRightClick: this.nodeRightClick.bind(this),
+        marriageClick: this.marriageClick.bind(this),
+        textRenderer: this.textRenderer,
+        nodeRenderer: this.nodeRenderer,
+        marriageRenderer: this.marriageRenderer,
+      },
     });
   }
 
-  initData(data: Tree): { memberList: Member[], targetId: number } {
+  private nodeClick(name: string, extra: MemberExcerpt) {
+    this.callbackFunctions.sharedNodeEmit(extra);
+    this.callbackFunctions.clickNodeEmit(extra);
+  }
+
+  private nodeRightClick(name: string, extra: MemberExcerpt) {
+    this.callbackFunctions.sharedNodeEmit(extra);
+    this.callbackFunctions.contextNodeEmit(extra);
+  }
+  
+  private marriageClick(extra: any) {
+    this.callbackFunctions.marriageEmit(extra);
+  }
+
+  private textRenderer(name: string, extra: MemberExcerpt, textClass: string) {
+    const date = extra?.date || '';
+
+    let extendedName = name;
+    if (extra && extra.nickname) {
+      extendedName += ` (${extra.nickname})`;
+    }
+
+    let previewPath = 'avatar.webp';
+    if (extra && extra?.previewPath !== '') {
+      previewPath = extra.previewPath;
+    }
+
+    return `
+    <div class="node">
+      <img class="node__avatar" src="${previewPath}" alt="text" height="50px" width="50px"> 
+      <p align="center" class="${textClass}">${extendedName}<div class="node__date">${date}</div></p>
+    </div>
+    `;
+  }
+
+  private nodeRenderer(
+    name: any, 
+    x: any, y: any, 
+    height: any, width: any, 
+    extra: any, id: string, 
+    nodeClass: string, textClass: any, 
+    textRenderer: (arg0: any, arg1: any, arg2: any) => string,
+  ) {
+    return `
+      <div style="height:100px;width:100%;" class="${textClass}" id="node${id}">
+        ${textRenderer(name, extra, nodeClass)}
+      </div>
+    `;
+  }
+
+  private marriageRenderer(
+    x: any, y: any, 
+    height: any, width: any, 
+    extra: any, id: any, 
+    nodeClass: any,
+  ) {
+    return `
+      <div style="height:100%" class="${nodeClass}" id="node${id}">
+        <img src="new-user-svgrepo-com.svg" alt="text" height="50px" width="50px"> 
+      </div>
+    `;
+  }
+
+  private initData(data: Tree): { memberList: Member[], targetId: number } {
     const targetId = data
       .layers[data.layers.length - 1]
       .nodes.find(value => !value.isSpouse)
@@ -151,5 +173,11 @@ export class TreeBuilderService {
       memberList,
       targetId,
     };
+  }
+
+  private initTreeData(memberList: Member[], targetId: number): Record<string, any> {
+    let treeData: Record<string, any> = dSeeder.seed(memberList, targetId, this.dSeederOptions) as Record<string, any>;
+
+    return deepOmit(treeData, 'depthOffset');
   }
 }
