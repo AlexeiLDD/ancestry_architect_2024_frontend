@@ -106,6 +106,8 @@ export class TreeComponent {
             this.treeCont.nativeElement.innerHTML = '';
           }
 
+          this.closeContextMenu();
+
           this.treeService.get(this.id as number).subscribe((treeResp) => {
             this.tree = treeResp.body;
             this.treeBuildService.init(this.contId, this.tree as Tree);
