@@ -4,6 +4,7 @@ import { TreeNode, TreeNodeMarriage } from "./treeNode";
 
 export namespace dSeeder {
     let _generationLimit = 100;
+
     function _getWithParentIds(data: Member[], id: number | null): Member {
         const member = data.find((member) => member.id === id);
 
@@ -12,6 +13,7 @@ export namespace dSeeder {
         }
         return member;
     }
+
     function _getWithoutParentIds(data: Member[], id: number | null): Member {
         let member = _getWithParentIds(data, id);
 
@@ -19,6 +21,7 @@ export namespace dSeeder {
         member.parent2Id = null;
         return member;
     }
+
     function _get(data: Member[], ids: number[], options: { preserveParentIds: boolean }): Member[] {
         const members = new Array<Member>();
         ids.forEach(id => {
@@ -29,6 +32,7 @@ export namespace dSeeder {
         });
         return members;
     }
+
     function _getChildren(data: Member[], ...parents: Member[]): Member[] {
         const childIds = data.filter((member) =>
             parents.some((parent) => parent.id === member.parent1Id || parent.id === member.parent2Id))
@@ -45,6 +49,7 @@ export namespace dSeeder {
         }
         return children;
     }
+
     function _getOtherParents(data: Member[], children: Member[], ...parents: Member[]): Member[] {
         const parentIds = parents.map((parent) => parent.id);
         const otherParentIds = children.map((child) =>
@@ -65,11 +70,13 @@ export namespace dSeeder {
         }
         return otherParents;
     }
+
     function _getSpouses(rawData: Member[], preparedData: Member[]): Member[] {
         return rawData
             .filter((member) => member.spouseId !== undefined)
             .filter((member) => preparedData.find((anotherMember) => anotherMember.id === member.id) === undefined);
     }
+
     function _getRelatives(data: Member[], targetId?: number): Member[] {
         if (data.length === 0) {
             throw new Error("Data cannot be empty");
@@ -144,6 +151,7 @@ export namespace dSeeder {
 
         return members;
     }
+
     function _combineIntoMarriages(data: Member[], options?: SeederOptions): TreeNode[] {
         if (data.length === 1) {
             return data.map((member) => new TreeNode(member, options));
@@ -199,6 +207,7 @@ export namespace dSeeder {
 
         return treeNodes;
     }
+
     function _coalesce(data: TreeNode[]): TreeNode[] {
         if (data.length === 0) {
             throw new Error("Data cannot be empty");
@@ -226,12 +235,14 @@ export namespace dSeeder {
         }
         return data;
     }
+
     export function seed(data: Member[], targetId: number, options?: SeederOptions): TreeNode[] {
         const members = _getRelatives(data, targetId);
         const marriages = _combineIntoMarriages(members, options);
         const rootNode = _coalesce(marriages);
         return rootNode;
     }
+    
     export const _private = {
         _getRelatives,
         _combineIntoMarriages,

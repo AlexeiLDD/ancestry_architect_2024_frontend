@@ -2,6 +2,14 @@ import { Member } from "../../../core/models/node";
 import { SeederOptions } from "./seederOptions";
 
 export class TreeNode {
+    id: number;
+    name: string;
+    class: string;
+    textClass: string;
+    depthOffset: number;
+    marriages: TreeNodeMarriage[];
+    extra: object;
+
     constructor(member: Member, options?: SeederOptions) {
         this.id = member.id;
         this.name = member?.name ?? "";
@@ -11,13 +19,7 @@ export class TreeNode {
         this.marriages = new Array<TreeNodeMarriage>();
         this.extra = options?.extra?.(member) ?? {};
     }
-    id: number;
-    name: string;
-    class: string;
-    textClass: string;
-    depthOffset: number;
-    marriages: TreeNodeMarriage[];
-    extra: object;
+    
     canInsertAsDescendant(descendent: TreeNode): boolean {
         if (this.id === descendent.id) {
             return false;
@@ -44,12 +46,15 @@ export class TreeNode {
                 return true;
             }
         }
+        
         return false;
     }
+
     private _overwriteChild(marriage: TreeNodeMarriage, newChild: TreeNode): void {
         const index = marriage.children.findIndex(child => child.id === newChild.id);
         marriage.children.splice(index, 1, newChild);
     }
+
     private _canInsertAsDescendantByPivotingOnAMarriage(marriage: TreeNodeMarriage, descendent: TreeNode): boolean {
         if (marriage.spouse === undefined) {
             return false;
@@ -67,6 +72,7 @@ export class TreeNode {
 
         return true;
     }
+
     private _pivotOnMarriage(marriage: TreeNodeMarriage, descendent: TreeNode): TreeNode {
         const newDescendent = marriage?.spouse as TreeNode;
         const newMarriage = new TreeNodeMarriage();
@@ -82,11 +88,12 @@ export class TreeNode {
 }
 
 export class TreeNodeMarriage {
+    spouse: TreeNode | null;
+    children: TreeNode[];
+    extra?: { mainId: number, spouseId: number };
+
     constructor() {
         this.spouse = null;
         this.children = new Array<TreeNode>();
     }
-    spouse: TreeNode | null;
-    children: TreeNode[];
-    extra?: { mainId: number, spouseId: number };
 }
