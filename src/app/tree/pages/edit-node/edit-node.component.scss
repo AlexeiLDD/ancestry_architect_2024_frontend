@@ -56,7 +56,7 @@ $color-primary: #3498db;
         width: 100%;
         padding: 10px;
         border: 1px solid #ccc;
-        border-radius: 4px;
+        border-radius: 10px;
         box-sizing: border-box;
 
         &--select {
@@ -70,6 +70,10 @@ $color-primary: #3498db;
         &--file {
             grid-area: avatar;
             cursor: pointer;
+
+            &::file-selector-button {
+                @include button.button-file();
+            }
         }
     }
 

@@ -1,8 +1,9 @@
 .tree-element {
-    border-radius: 4px;
+    border-radius: 10px;
     margin-bottom: 8px;
     display: inline-flex;
     width: 100%;
+    overflow: hidden;
 
     &--created {
         background-color: #e6f0ff;

@@ -8,7 +8,7 @@
     align-items: stretch;
     background: linear-gradient(135deg, rgba(230, 255, 255, 0.7), rgba(200, 240, 255, 0.7)); 
     border: 1px solid #c0d9e6; 
-    border-radius: 15px; 
+    border-radius: 10px; 
     padding: 20px; 
     width: 100%; 
     max-width: 600px; 
@@ -44,7 +44,7 @@
         background: rgb(249,195,195);
         background: linear-gradient(68deg, rgba(249,195,195,1) 0%, rgba(254,217,217,1) 50%, rgba(252,69,69,1) 100%);
         border-color: darkgrey;
-        border-radius: 6px;
+        border-radius: 10px;
         padding: 6px;
         transform: translateX(0%);
         transition: transform ease-out 1s;

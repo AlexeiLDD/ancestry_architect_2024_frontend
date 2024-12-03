@@ -12,7 +12,7 @@
     background: rgb(249,195,195);
     background: linear-gradient(68deg, rgba(249,195,195,1) 0%, rgba(254,217,217,1) 50%, rgba(252,69,69,1) 100%);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Тень для добавления глубины
-    border-radius: 0px 0px 5px 5px;
+    border-radius: 0px 0px 10px 10px;
     z-index: 10;
 
     &__logo {
@@ -35,7 +35,7 @@
         padding: 0px 10px;
         align-items: center;
         gap: 5px;
-        border-radius: 8px;
+        border-radius: 10px;
         border: solid;
         border-color: black;
         color: black;
@@ -94,7 +94,7 @@
                 cursor: default;
             
                 transform: translateY(10px);
-                border-radius: 8px;
+                border-radius: 10px;
                 background-color: #f0f0f0;
                 border: 1px solid #cfcfcf;
                

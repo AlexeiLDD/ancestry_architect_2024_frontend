@@ -3,13 +3,26 @@
     padding: 10px 20px;
     border: none;
     cursor: pointer;
-    border-radius: 8px; // Скругленные углы
+    border-radius: 10px; // Скругленные углы
     text-decoration: none;
     color: black;
     transition: all 0.3s ease-in-out;
 
     &:hover{
         background-color: darken($background, $amount: 10);
+    }
+}
+
+@mixin button-file{
+    margin-right: 10px;
+    border: none;
+    background: #b3d9ff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    
+    &:hover {
+        background: #d0e3ff;
     }
 }
 
