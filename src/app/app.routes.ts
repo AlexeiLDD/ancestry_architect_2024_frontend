@@ -8,6 +8,7 @@ import { LoginRequiredService } from './shared/services/login-required/login-req
 import { CreateTreeComponent } from './tree/pages/create-tree/create-tree.component';
 import { TreeComponent } from './tree/pages/tree/tree.component';
 import { EditNodeComponent } from './tree/pages/edit-node/edit-node.component';
+import { CreateNodePairComponent } from './tree/pages/create-node-pair/create-node-pair.component';
 
 const loginRequiredRoutes: Routes = [
   {
@@ -35,6 +36,12 @@ const loginRequiredRoutes: Routes = [
     canActivate: [LoginRequiredService]
   },
   {
+    path: 'tree/:id/node/parents',
+    title: 'Добавить родителей',
+    component: CreateNodePairComponent,
+    canActivate: [LoginRequiredService]
+  },
+  {
     path: 'tree/:id/node',
     title: 'Добавить родственника',
     component: EditNodeComponent,
@@ -42,7 +49,7 @@ const loginRequiredRoutes: Routes = [
   },
   {
     path: 'tree/:id/node/:nodeId',
-    title: 'Добавить родственника',
+    title: 'Редактировать родственника',
     component: EditNodeComponent,
     canActivate: [LoginRequiredService]
   }

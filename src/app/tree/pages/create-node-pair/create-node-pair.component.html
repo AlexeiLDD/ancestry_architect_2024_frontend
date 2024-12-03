@@ -1,0 +1,93 @@
+<section class="node-info">
+    <h2>{{title}}</h2>
+    <h4>Выберите родственника, принадлежащего к основной ветви древа</h4>
+    <div class="pair-node-container">
+        <div class="pair-node-container__item form-radio-btn">
+            <input id="parent1" [value]="1" [(ngModel)]="mainParant" type="radio" name="parents">
+            <label for="parent1">{{mainParant === 1 ? 'Основная ветвь' : 'Супруг'}}</label>
+        </div>
+        <div class="pair-node-container__item form-radio-btn">
+            <input id="parent2" [value]="2" [(ngModel)]="mainParant" type="radio" name="parents">
+            <label for="parent2">{{mainParant === 2 ? 'Основная ветвь' : 'Супруг'}}</label>
+        </div>
+    </div>
+      
+    <form class="node-form" [formGroup]="pairNodeForm">
+        <div class="pair-node-container">
+            <div class="pair-node-container__item">
+                <div class="node-form__item node-form__item--end">
+                    @if (pairNodeForm.controls.previewPath1.value !== '') {
+                        <img class="avatar" ngSrc="{{pairNodeForm.controls.previewPath1.value}}" alt="avatar" height="300" width="300" priority/>
+                    } @else {
+                        <img class="avatar" ngSrc="avatar.webp" alt="avatar" height="300" width="300" priority/>
+                    }
+                    <label class="node-form__label" for="avatar1">Аватар:</label>
+                    <input type="file" id="avatar1" name="avatar1" accept="image/*" (change)="loadAvatar($event)" class="node-form__input--file" formControlName="previewPath1">
+                </div>
+                <div class="node-form__item node-form__item--end">
+                    <label class="node-form__label" for="name1">Имя:</label>
+                    <input type="text" id="name1" name="name1" placeholder="Иванов Иван Иванович" class="node-form__input" formControlName="name1">
+                </div>
+                <div class="node-form__item node-form__item--end">
+                    <label class="node-form__label" for="birthdate1">Дата рождения:</label>
+                    <input type="date" id="birthdate1" name="birthdate1" class="node-form__input" formControlName="birthdate1">
+                </div>
+                <div class="node-form__item node-form__item--end">
+                    <label class="node-form__label" for="deathdate1">Дата смерти:</label>
+                    <input type="date" id="deathdate1" name="deathdate1" class="node-form__input" formControlName="deathdate1">
+                </div>
+                <div class="node-form__item node-form__item--end">
+                    <label class="node-form__label" for="gender1">Пол:</label>
+                    <select id="gender1" name="gender1" class="node-form__input node-form__input--select" formControlName="gender1" >
+                        <option value="">Выберите пол</option>
+                        <option value="Мужской">Мужской</option>
+                        <option value="Женский">Женский</option>
+                    </select>
+                </div>
+                <div class="node-form__item node-form__item--end">
+                    <label class="node-form__label" for="description1">Описание:</label>
+                    <textarea type="text" id="description1" name="description1" class="node-form__input node-form__text" formControlName="description1"></textarea>
+                </div>
+            </div>
+            <div class="pair-node-container__item">
+                <div class="node-form__item node-form__item--end">
+                    @if (pairNodeForm.controls.previewPath2.value !== '') {
+                        <img class="avatar" ngSrc="{{pairNodeForm.controls.previewPath2.value}}" alt="avatar" height="300" width="300" priority/>
+                    } @else {
+                        <img class="avatar" ngSrc="avatar.webp" alt="avatar" height="300" width="300" priority/>
+                    }
+                    <label class="node-form__label" for="avatar2">Аватар:</label>
+                    <input type="file" id="avatar2" name="avatar2" accept="image/*" (change)="loadAvatar($event)" class="node-form__input--file" formControlName="previewPath2">
+                </div>
+                <div class="node-form__item node-form__item--end">
+                    <label class="node-form__label" for="name2">Имя:</label>
+                    <input type="text" id="name2" name="name2" placeholder="Иванов Иван Иванович" class="node-form__input" formControlName="name2">
+                </div>
+                <div class="node-form__item node-form__item--end">
+                    <label class="node-form__label" for="birthdate2">Дата рождения:</label>
+                    <input type="date" id="birthdate2" name="birthdate2" class="node-form__input" formControlName="birthdate2">
+                </div>
+                <div class="node-form__item node-form__item--end">
+                    <label class="node-form__label" for="deathdate2">Дата смерти:</label>
+                    <input type="date" id="deathdate2" name="deathdate2" class="node-form__input" formControlName="deathdate2">
+                </div>
+                <div class="node-form__item node-form__item--end">
+                    <label class="node-form__label" for="gender2">Пол:</label>
+                    <select id="gender2" name="gender2" class="node-form__input node-form__input--select" formControlName="gender2" >
+                        <option value="">Выберите пол</option>
+                        <option value="Мужской">Мужской</option>
+                        <option value="Женский">Женский</option>
+                    </select>
+                </div>
+                <div class="node-form__item node-form__item--end">
+                    <label class="node-form__label" for="description2">Описание:</label>
+                    <textarea type="text" id="description2" name="description2" class="node-form__input node-form__text" formControlName="description2"></textarea>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="node-form__submit" (click)="createPairNode()">{{submitButtonTitle}}</button>
+    </form>
+</section>
+@if (renderMessage) {
+    <app-popup-message is-succeed="{{isSucceed}}" message="{{message}}"></app-popup-message>
+}
