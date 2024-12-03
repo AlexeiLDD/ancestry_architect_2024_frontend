@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "api": "node server_api/server.js"
+    "uploads": "node server_api/server.js"
   },
   "private": true,
   "dependencies": {

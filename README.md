@@ -2,28 +2,24 @@
 
 Данный репозиторий содержит в себе клиентскую часть приложения для построения генеалогического древа "Ancestry Architect". Readme-файл будет обновляться по мере необходимости.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.3.
+Этот проект был создан с помощью [Angular CLI](https://github.com/angular/angular-cli) version 18.1.3.
 
-## Development server
+## Сервер разработки
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Выполните `ng serve` для запуска сервера разработки. Перейдите на `http://localhost:4200/`. Приложение автоматически перезагрузится, если Вы измените какой-либо из исходных файлов.
 
-## Code scaffolding
+## Сервер файлового сервиса
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Выполните `ng run uploads` для запуска сервера файлового сервиса. Сервис доступен на `http://localhost:3000/`.
 
-## Build
+## Сборка
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Выполните `ng build` для сборки проекта. Файлы сборки будут сохранены в каталоге `dist/`.
 
-## Running unit tests
+## Запуск unit-тестов
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Выполните `ng test` для выполнения unit-тестов через [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Запуск end-to-end-тестов
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Выполните `ng e2e` для выполнения end-to-end-тестов через выбранную вами платформу. Чтобы использовать эту команду, вам необходимо сначала добавить пакет, реализующий возможности end-to-end тестирования.
